@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <title>Lista de equipamentos</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+    <h1>
+        Lista de equipamentos
+    </h1>
+
+    <a href="/equipamento/formulario">Novo</a>
+    <a href="home/page">Voltar para Home</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>TAG</th>
+            <th>CATEGORIA</th>
+            <th>RFID</th>
+            <th>HABILITAR</th>
+            <th>EMPRESA</th>
+            <th>COD. CC</th>
+            <th>DES. CC</th>
+            <th>AÇÕES</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="equipamento : ${lista}">
+            <td th:text="${equipamento.tag}"></td>
+            <td th:text="${equipamento.categoria}"></td>
+            <td th:text="${equipamento.rfid}"></td>
+            <td th:text="${equipamento.habilitar}"></td>
+            <td th:text="${equipamento.empresa}"></td>
+            <td th:text="${equipamento.cod_centro_custo}"></td>
+            <td th:text="${equipamento.des_centro_custo}"></td>
+
+            <td>
+                <a th:href="@{/equipamento/formulario?id={id}(id=${equipamento.id})}">Editar</a>
+
+                <form action="/equipamento" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="id" th:value="${equipamento.id}">
+
+                    <input type="submit" value="Excluir">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

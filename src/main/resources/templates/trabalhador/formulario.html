@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <base href="/" />
+    <title>Cadastro de trabalhador</title>
+</head>
+<body>
+    <div layout:fragment="conteudo">
+        <h1>
+            Cadastro Trabalhador
+        </h1>
+
+        <a href="home/page">Voltar para Home</a>
+
+        <form method="post" action="/trabalhador">
+
+            <input type="hidden" name="_method" value="put" th:if="${trabalhador != null}">
+            <input type="hidden" name="id" th:value="${trabalhador?.id}">
+
+            <div>
+                <label for="matricula">
+                    Matricula:
+                </label>
+                <input id="matricula" name="matricula" th:value="${trabalhador?.matricula}">
+            </div>
+
+            <div>
+                <label for="nome">
+                    Nome:
+                </label>
+                <input id="nome" name="nome" th:value="${trabalhador?.nome}">
+            </div>
+
+            <div>
+                <label for="empresa">
+                    Empresa:
+                </label>
+                <a href="/empresa/formulario" class="btn">Cadastrar empresa</a>
+                <select id="empresa" name="empresa">
+                    <option value="">Selecione a empresa</option>
+                    <option th:each="empresa : ${empresas}" th:value="${empresa.nome}" th:selected="${
+                        trabalhador != null and trabalhador.empresa?.nome == empresa.nome
+                    }">
+                        <span th:text="${empresa.nome}"></span>
+                </select>
+            </div>
+
+            <div>
+                <label for="tipo">
+                    Tipo:
+                </label>
+                <input id="tipo" name="tipo" th:value="${trabalhador?.tipo}">
+            </div>
+
+            <div>
+                <label for="rfid">
+                    RFID:
+                </label>
+                <input id="rfid" name="rfid" th:value="${trabalhador?.rfid}">
+            </div>
+
+            <div>
+                <label for="habilitar">
+                    Habilitar:
+                </label>
+                <input id="habilitar" name="habilitar" type="checkbox" th:checked="${trabalhador?.habilitar}">
+            </div>
+
+            <input type="submit" value="Cadastrar">
+
+        </form>
+    </div>
+</body>
+</html>

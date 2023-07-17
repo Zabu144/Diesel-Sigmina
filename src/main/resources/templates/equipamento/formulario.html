@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <base href="/" />
+    <title>Cadastro de equipamento</title>
+</head>
+
+<body>
+<div layout:fragment="conteudo">
+    <h1>
+        Cadastro Equipamento
+    </h1>
+
+    <a href="home/page">Voltar para Home</a>
+
+    <form method="post" action="/equipamento">
+
+        <input type="hidden" name="_method" value="put" th:if="${equipamento != null}">
+        <input type="hidden" name="id" th:value="${equipamento?.id}">
+
+        <div>
+            <label for="tag">
+                Tag:
+            </label>
+            <input id="tag" name="tag" th:value="${equipamento?.tag}">
+        </div>
+
+        <div>
+            <label for="categoria">
+                Categoria:
+            </label>
+            <input id="categoria" name="categoria" th:value="${equipamento?.categoria}">
+        </div>
+
+        <div>
+            <label for="rfid">
+                RFID:
+            </label>
+            <input id="rfid" name="rfid" th:value="${equipamento?.rfid}">
+        </div>
+
+        <div>
+            <label for="habilitar">
+                Habilitar:
+            </label>
+            <input id="habilitar" name="habilitar" type="checkbox" th:checked="${equipamento?.habilitar}">
+        </div>
+
+
+        <div>
+            <label for="empresa">
+                Empresa:
+            </label>
+            <a href="/empresa/formulario" class="btn">Cadastrar empresa</a>
+            <select id="empresa" name="empresa">
+                <option value="">Selecione a empresa</option>
+                <option th:each="empresa : ${empresas}" th:value="${empresa.nome}" th:selected="${
+                        equipamento != null and equipamento.empresa?.nome == empresa.nome
+                    }">
+                    <span th:text="${empresa.nome}"></span>
+            </select>
+        </div>
+
+        <div>
+            <label for="cod_centro_custo">
+                Cód CC:
+            </label>
+            <input id="cod_centro_custo" name="cod_centro_custo" th:value="${equipamento?.cod_centro_custo}">
+        </div>
+
+        <div>
+            <label for="des_centro_custo">
+                Descrição CC:
+            </label>
+            <input id="des_centro_custo" name="des_centro_custo" th:value="${equipamento?.des_centro_custo}">
+        </div>
+
+        <input type="submit" value="Cadastrar">
+
+    </form>
+</div>
+</body>
+</html>

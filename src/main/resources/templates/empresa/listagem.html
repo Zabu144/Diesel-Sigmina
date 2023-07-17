@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+  <title>Lista de empresa</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+  <h1>
+    Lista de empresa
+  </h1>
+
+  <a href="/empresa/formulario">Novo</a>
+  <a href="home/page">Voltar para Home</a>
+
+  <table>
+    <thead>
+    <tr>
+      <th>NOME</th>
+      <th>CNPJ</th>
+      <th>HABILITAR</th>
+      <th>AÇÕES</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="empresa : ${lista}">
+      <td th:text="${empresa.nome}"></td>
+      <td th:text="${empresa.cnpj}"></td>
+      <td th:text="${empresa.habilitar}"></td>
+
+      <td>
+        <a th:href="@{/empresa/formulario?id={id}(id=${empresa.id})}">Editar</a>
+
+        <form action="/empresa" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="id" th:value="${empresa.id}">
+
+          <input type="submit" value="Excluir">
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

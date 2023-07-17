@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+  <title>HOME</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+  <h1>
+    HOME
+    <h3>Clique para cadastrar:</h3>
+
+    <a href="/trabalhador/formulario"><button>TRABALHADOR</button></a>
+    <a href="/equipamento/formulario"><button>EQUIPAMENTO</button></a>
+    <a href="/trabalhador/formulario"><button>POSTO</button></a>
+    <a href="/empresa/formulario"><button>EMPRESA</button></a>
+
+  </h1>
+</div>
+</body>
