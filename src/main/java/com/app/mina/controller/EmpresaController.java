@@ -1,5 +1,6 @@
 package com.app.mina.controller;
 
+import com.app.mina.domain.empresa.DadosAlteracaoEmpresa;
 import com.app.mina.domain.empresa.DadosCadastroEmpresa;
 import com.app.mina.domain.empresa.Empresa;
 import com.app.mina.domain.empresa.EmpresaRepository;
@@ -7,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/empresa")
@@ -36,10 +34,19 @@ public class EmpresaController {
 
     @PostMapping
     @Transactional
-    public String cadastraEquipamento(DadosCadastroEmpresa dados) {
+    public String cadastraEmpresa(DadosCadastroEmpresa dados) {
         var empresa = new Empresa(dados);
 
         repository.save(empresa);
+
+        return "redirect:/empresa";
+    }
+
+    @PutMapping
+    @Transactional
+    public String alteraEmpresa(DadosAlteracaoEmpresa dados) {
+        var empresa = repository.getReferenceById(dados.id());
+        empresa.atualizaDados(dados);
 
         return "redirect:/empresa";
     }

@@ -43,9 +43,10 @@
                 <select id="empresa" name="empresa">
                     <option value="">Selecione a empresa</option>
                     <option th:each="empresa : ${empresas}" th:value="${empresa.nome}" th:selected="${
-                        trabalhador != null and trabalhador.empresa?.nome == empresa.nome
+                        trabalhador != null and trabalhador.empresa == empresa
                     }">
-                        <span th:text="${empresa.nome}"></span>
+                       <span th:text="${empresa.nome}"></span>
+                    </option>
                 </select>
             </div>
 

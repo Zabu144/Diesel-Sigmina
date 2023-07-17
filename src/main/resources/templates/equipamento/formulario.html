@@ -59,9 +59,10 @@
             <select id="empresa" name="empresa">
                 <option value="">Selecione a empresa</option>
                 <option th:each="empresa : ${empresas}" th:value="${empresa.nome}" th:selected="${
-                        equipamento != null and equipamento.empresa?.nome == empresa.nome
+                        equipamento != null and equipamento.empresa == empresa
                     }">
                     <span th:text="${empresa.nome}"></span>
+                </option>
             </select>
         </div>
 
@@ -72,12 +73,6 @@
             <input id="cod_centro_custo" name="cod_centro_custo" th:value="${equipamento?.cod_centro_custo}">
         </div>
 
-        <div>
-            <label for="des_centro_custo">
-                Descrição CC:
-            </label>
-            <input id="des_centro_custo" name="des_centro_custo" th:value="${equipamento?.des_centro_custo}">
-        </div>
 
         <input type="submit" value="Cadastrar">
 
