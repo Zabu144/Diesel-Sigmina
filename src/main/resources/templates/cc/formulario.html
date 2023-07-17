@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <base href="/" />
+    <title>Cadastro de Centro de custo</title>
+</head>
+
+<body>
+<div layout:fragment="conteudo">
+    <h1>
+        Cadastro Centro de custo
+    </h1>
+
+    <a href="home/page">Voltar para Home</a>
+
+    <form method="post" action="/cc">
+
+        <input type="hidden" name="_method" value="put" th:if="${cc != null}">
+        <input type="hidden" name="id" th:value="${cc?.id}">
+
+        <div>
+            <label for="codigo_cc">
+                Código centro de custo:
+            </label>
+            <input id="codigo_cc" name="codigo" th:value="${cc?.codigo_cc}">
+        </div>
+
+        <div>
+            <label for="descricao_cc">
+                Descrição centro de custo:
+            </label>
+            <input id="descricao_cc" name="descricao_cc" th:value="${cc?.descricao_cc}">
+        </div>
+
+
+        <input type="submit" value="Cadastrar">
+
+    </form>
+</div>
+</body>
+</html>

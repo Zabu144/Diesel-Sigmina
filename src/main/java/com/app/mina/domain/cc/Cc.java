@@ -3,7 +3,7 @@ package com.app.mina.domain.cc;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "centro_de_custo")
+@Table(name = "cc")
 public class Cc {
 
     @Id
