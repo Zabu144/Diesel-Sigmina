@@ -14,8 +14,7 @@ public class Equipamento {
     private String rfid;
     private Boolean habilitar;
     private String empresa;
-    private String cod_centro_custo;
-    private String des_centro_custo;
+    private String custos;
 
     public Equipamento(DadosCadastroEquipamento dados) {
         this.tag = dados.tag();
@@ -23,8 +22,7 @@ public class Equipamento {
         this.rfid = dados.rfid();
         this.habilitar = dados.habilitar();
         this.empresa = dados.empresa();
-        this.cod_centro_custo = dados.cod_centro_custo();
-        this.des_centro_custo = dados.des_centro_custo();
+        this.custos = dados.custos();
     }
 
     public Equipamento(){}
@@ -38,8 +36,7 @@ public class Equipamento {
                 ", rfid='" + rfid + '\'' +
                 ", habilitar=" + habilitar +
                 ", empresa='" + empresa + '\'' +
-                ", cod_centro_custo='" + cod_centro_custo + '\'' +
-                ", des_centro_custo='" + des_centro_custo + '\'' +
+                ", custos='" + custos + '\'' +
                 '}';
     }
 
@@ -67,12 +64,8 @@ public class Equipamento {
         return empresa;
     }
 
-    public String getCod_centro_custo() {
-        return cod_centro_custo;
-    }
-
-    public String getDes_centro_custo() {
-        return des_centro_custo;
+    public String getCustos() {
+        return custos;
     }
 
     public void atualizaDados(DadosAlteracaoEquipamento dados) {
@@ -81,7 +74,6 @@ public class Equipamento {
         this.rfid = dados.rfid();
         this.habilitar = dados.habilitar();
         this.empresa = dados.empresa();
-        this.cod_centro_custo = dados.cod_centro_custo();
-        this.des_centro_custo = dados.des_centro_custo();
+        this.custos = dados.custos();
     }
 }

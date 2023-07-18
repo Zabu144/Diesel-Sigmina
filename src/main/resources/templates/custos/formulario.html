@@ -17,23 +17,23 @@
 
     <a href="home/page">Voltar para Home</a>
 
-    <form method="post" action="/cc">
+    <form method="post" action="/custos">
 
-        <input type="hidden" name="_method" value="put" th:if="${cc != null}">
-        <input type="hidden" name="id" th:value="${cc?.id}">
+        <input type="hidden" name="_method" value="put" th:if="${custos != null}">
+        <input type="hidden" name="id" th:value="${custos?.id}">
 
         <div>
-            <label for="codigo_cc">
+            <label for="codigo">
                 Código centro de custo:
             </label>
-            <input id="codigo_cc" name="codigo" th:value="${cc?.codigo_cc}">
+            <input id="codigo" name="codigo" th:value="${custos?.codigo}">
         </div>
 
         <div>
-            <label for="descricao_cc">
+            <label for="descricao">
                 Descrição centro de custo:
             </label>
-            <input id="descricao_cc" name="descricao_cc" th:value="${cc?.descricao_cc}">
+            <input id="descricao" name="descricao" th:value="${custos?.descricao}">
         </div>
 
 

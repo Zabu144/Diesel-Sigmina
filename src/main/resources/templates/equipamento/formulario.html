@@ -67,12 +67,19 @@
         </div>
 
         <div>
-            <label for="cod_centro_custo">
-                Cód CC:
+            <label for="custos">
+                Código CC:
             </label>
-            <input id="cod_centro_custo" name="cod_centro_custo" th:value="${equipamento?.cod_centro_custo}">
+            <a href="/custos/formulario" class="btn">Cadastrar Centro de custo</a>
+            <select id="custos" name="custos">
+                <option value="">Selecione o código CC</option>
+                <option th:each="custos : ${custo}" th:value="${custos.codigo}" th:selected="${
+                        equipamento != null and equipamento.custos == custos
+                    }">
+                    <span th:text="${custos.codigo}"></span>
+                </option>
+            </select>
         </div>
-
 
         <input type="submit" value="Cadastrar">
 

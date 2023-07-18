@@ -25,7 +25,6 @@
             <th>HABILITAR</th>
             <th>EMPRESA</th>
             <th>COD. CC</th>
-            <th>DES. CC</th>
             <th>AÇÕES</th>
         </tr>
         </thead>
@@ -37,8 +36,7 @@
             <td th:text="${equipamento.rfid}"></td>
             <td th:text="${equipamento.habilitar}"></td>
             <td th:text="${equipamento.empresa}"></td>
-            <td th:text="${equipamento.cod_centro_custo}"></td>
-            <td th:text="${equipamento.des_centro_custo}"></td>
+            <td th:text="${equipamento.custos}"></td>
 
             <td>
                 <a th:href="@{/equipamento/formulario?id={id}(id=${equipamento.id})}">Editar</a>

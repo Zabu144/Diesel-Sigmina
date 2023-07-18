@@ -1,5 +1,7 @@
 package com.app.mina.controller;
 
+import com.app.mina.domain.custos.Custos;
+import com.app.mina.domain.custos.CustosRepository;
 import com.app.mina.domain.empresa.Empresa;
 import com.app.mina.domain.empresa.EmpresaRepository;
 import com.app.mina.domain.equipamento.DadosAlteracaoEquipamento;
@@ -24,6 +26,9 @@ public class EquipamentoController {
     @Autowired
     private EmpresaRepository empresaRepository;
 
+    @Autowired
+    private CustosRepository custosRepository;
+
     @GetMapping("/formulario")
     public String carregaPaginaFormulario(Long id, Model model) {
         if (id != null) {
@@ -33,6 +38,9 @@ public class EquipamentoController {
 
         List<Empresa> empresas = empresaRepository.findAll();
         model.addAttribute("empresas", empresas);
+
+        List<Custos> custo = custosRepository.findAll();
+        model.addAttribute("custo", custo);
 
         return "equipamento/formulario";
     }
