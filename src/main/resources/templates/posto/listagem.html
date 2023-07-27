@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+  <title>Lista de postos</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+  <h1>
+    Lista de postos
+  </h1>
+
+  <a href="/posto/formulario">Novo</a>
+  <a href="home/page">Voltar para Home</a>
+
+  <table>
+    <thead>
+    <tr>
+      <th>NOME</th>
+      <th>TIPO</th>
+      <th>AÇÕES</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="posto : ${lista}">
+      <td th:text="${posto.nome}"></td>
+      <td th:text="${posto.tipo}"></td>
+
+      <td>
+        <a th:href="@{/posto/formulario?id={id}(id=${posto.id})}">Editar</a>
+
+        <form action="/posto" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="id" th:value="${posto.id}">
+
+          <input type="submit" value="Excluir">
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

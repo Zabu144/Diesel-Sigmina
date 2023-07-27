@@ -29,6 +29,8 @@ public class EquipamentoController {
     @Autowired
     private CustosRepository custosRepository;
 
+
+
     @GetMapping("/formulario")
     public String carregaPaginaFormulario(Long id, Model model) {
         if (id != null) {

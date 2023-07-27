@@ -9,29 +9,29 @@
 </head>
 <body>
 <div layout:fragment="conteudo">
-  <h1>
-    HOME
-  </h1>
+  <h1>HOME</h1>
 
-  <div>
-    <h3>Clique para cadastrar:</h3>
+  <div class="buttons-container">
+    <div class="category-container">
+      <h3>Clique para cadastrar:</h3>
+      <a href="/trabalhador/formulario" class="btn">TRABALHADOR</a>
+      <a href="/equipamento/formulario" class="btn">EQUIPAMENTO</a>
+      <a href="/posto/formulario" class="btn">POSTO</a>
+      <a href="/empresa/formulario" class="btn">EMPRESA</a>
+      <a href="/custos/formulario" class="btn">CENTRO DE CUSTO</a>
+      <a href="/categoria/formulario" class="btn">CATEGORIA</a>
+    </div>
 
-    <a href="/trabalhador/formulario"><button>TRABALHADOR</button></a>
-    <a href="/equipamento/formulario"><button>EQUIPAMENTO</button></a>
-    <a href="/trabalhador/formulario"><button>POSTO</button></a>
-    <a href="/empresa/formulario"><button>EMPRESA</button></a>
-    <a href="/custos/formulario"><button>CENTRO DE CUSTO</button></a>
+    <div class="category-container">
+      <h3>Clique para ver:</h3>
+      <a href="/trabalhador" class="btn">TRABALHADOR</a>
+      <a href="/equipamento" class="btn">EQUIPAMENTO</a>
+      <a href="/posto" class="btn">POSTO</a>
+      <a href="/empresa" class="btn">EMPRESA</a>
+      <a href="/custos" class="btn">CENTRO DE CUSTO</a>
+      <a href="/categoria" class="btn">CATEGORIA</a>
+    </div>
   </div>
-
-  <div>
-    <h3>Clique para ver:</h3>
-
-    <a href="/trabalhador"><button>TRABALHADOR</button></a>
-    <a href="/equipamento"><button>EQUIPAMENTO</button></a>
-    <a href="/trabalhador"><button>POSTO</button></a>
-    <a href="/empresa"><button>EMPRESA</button></a>
-    <a href="/custos"><button>CENTRO DE CUSTO</button></a>
-  </div>
-
 </div>
 </body>
+</html>
