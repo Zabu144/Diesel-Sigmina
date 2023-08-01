@@ -19,8 +19,9 @@
     <table>
         <thead>
         <tr>
-            <th>TAG</th>
             <th>CATEGORIA</th>
+            <th>SIGLA</th>
+            <th>TAG</th>
             <th>RFID</th>
             <th>HABILITAR</th>
             <th>EMPRESA</th>
@@ -31,10 +32,13 @@
 
         <tbody>
         <tr th:each="equipamento : ${lista}">
-            <td th:text="${equipamento.tag}"></td>
             <td th:text="${equipamento.categoria}"></td>
+            <td th:text="${equipamento.sigla}"></td>
+            <td th:text="${equipamento.tag}"></td>
             <td th:text="${equipamento.rfid}"></td>
-            <td th:text="${equipamento.habilitar}"></td>
+            <td>
+                <span th:text="${equipamento.habilitar != null && equipamento.habilitar ? 'Sim' : 'Não'}"></span>
+            </td>
             <td th:text="${equipamento.empresa}"></td>
             <td th:text="${equipamento.custos}"></td>
 

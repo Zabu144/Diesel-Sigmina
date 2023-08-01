@@ -1,4 +1,4 @@
 package com.app.mina.domain.categoria;
 
-public record DadosCadastroCategoria(String tag, String nome) {
+public record DadosCadastroCategoria(String sigla, String nome) {
 }

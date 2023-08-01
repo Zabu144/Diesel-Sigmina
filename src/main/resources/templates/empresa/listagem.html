@@ -30,7 +30,9 @@
     <tr th:each="empresa : ${lista}">
       <td th:text="${empresa.nome}"></td>
       <td th:text="${empresa.cnpj}"></td>
-      <td th:text="${empresa.habilitar}"></td>
+      <td>
+        <span th:text="${empresa.habilitar != null && empresa.habilitar ? 'Sim' : 'Não'}"></span>
+      </td>
 
       <td>
         <a th:href="@{/empresa/formulario?id={id}(id=${empresa.id})}">Editar</a>

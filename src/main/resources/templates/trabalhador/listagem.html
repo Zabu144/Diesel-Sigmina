@@ -36,7 +36,9 @@
                     <td th:text="${trabalhador.empresa}"></td>
                     <td th:text="${trabalhador.rfid}"></td>
                     <td th:text="${trabalhador.tipo}"></td>
-                    <td th:text="${trabalhador.habilitar}"></td>
+                    <td>
+                        <span th:text="${trabalhador.habilitar != null && trabalhador.habilitar ? 'Sim' : 'Não'}"></span>
+                    </td>
 
                     <td>
                         <a th:href="@{/trabalhador/formulario?id={id}(id=${trabalhador.id})}">Editar</a>

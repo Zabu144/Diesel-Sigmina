@@ -1,4 +1,4 @@
 package com.app.mina.domain.categoria;
 
-public record DadosAlteracaoCategoria (Long id, String tag, String nome){
+public record DadosAlteracaoCategoria (Long id, String sigla, String nome){
 }

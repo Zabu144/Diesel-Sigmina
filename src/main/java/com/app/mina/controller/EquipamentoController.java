@@ -1,5 +1,7 @@
 package com.app.mina.controller;
 
+import com.app.mina.domain.categoria.Categoria;
+import com.app.mina.domain.categoria.CategoriaRepository;
 import com.app.mina.domain.custos.Custos;
 import com.app.mina.domain.custos.CustosRepository;
 import com.app.mina.domain.empresa.Empresa;
@@ -9,6 +11,7 @@ import com.app.mina.domain.equipamento.DadosCadastroEquipamento;
 import com.app.mina.domain.equipamento.Equipamento;
 import com.app.mina.domain.equipamento.EquipamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -29,7 +32,8 @@ public class EquipamentoController {
     @Autowired
     private CustosRepository custosRepository;
 
-
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @GetMapping("/formulario")
     public String carregaPaginaFormulario(Long id, Model model) {
@@ -43,6 +47,9 @@ public class EquipamentoController {
 
         List<Custos> custo = custosRepository.findAll();
         model.addAttribute("custo", custo);
+
+        List<Categoria> categorias = categoriaRepository.findAll();
+        model.addAttribute("categorias", categorias);
 
         return "equipamento/formulario";
     }
@@ -78,5 +85,17 @@ public class EquipamentoController {
         repository.deleteById(id);
 
         return "redirect:/equipamento";
+    }
+
+    //Método para lidar com a requisição AJAX e retornar as informações da categoria em outros formulários
+    @GetMapping("getSiglaByCategoria")
+    @ResponseBody
+    public ResponseEntity<String> getSiglaByCategoria(@RequestParam("categoria") String categoria) {
+        Categoria categoriaSelecionada = categoriaRepository.findByNome(categoria);
+        if (categoriaSelecionada != null) {
+            return ResponseEntity.ok(categoriaSelecionada.getSigla());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

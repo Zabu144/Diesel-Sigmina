@@ -15,6 +15,8 @@ public class Equipamento {
     private Boolean habilitar;
     private String empresa;
     private String custos;
+    private String sigla;
+    private String cnpj;
 
     public Equipamento(DadosCadastroEquipamento dados) {
         this.tag = dados.tag();
@@ -23,6 +25,8 @@ public class Equipamento {
         this.habilitar = dados.habilitar();
         this.empresa = dados.empresa();
         this.custos = dados.custos();
+        this.sigla = dados.sigla();
+        this.cnpj = dados.cnpj();
     }
 
     public Equipamento(){}
@@ -37,6 +41,8 @@ public class Equipamento {
                 ", habilitar=" + habilitar +
                 ", empresa='" + empresa + '\'' +
                 ", custos='" + custos + '\'' +
+                ", sigla='" + sigla + '\'' +
+                ", cnpj='" + cnpj + '\'' +
                 '}';
     }
 
@@ -67,6 +73,12 @@ public class Equipamento {
     public String getCustos() {
         return custos;
     }
+    public String getSigla() {
+        return sigla;
+    }
+    public String getCnpj() {
+        return cnpj;
+    }
 
     public void atualizaDados(DadosAlteracaoEquipamento dados) {
         this.tag = dados.tag();
@@ -75,5 +87,7 @@ public class Equipamento {
         this.habilitar = dados.habilitar();
         this.empresa = dados.empresa();
         this.custos = dados.custos();
+        this.sigla = dados.sigla();
+        this.cnpj = dados.cnpj();
     }
 }

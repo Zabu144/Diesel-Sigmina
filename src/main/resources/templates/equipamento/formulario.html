@@ -7,6 +7,29 @@
 <head>
     <base href="/" />
     <title>Cadastro de equipamento</title>
+
+
+    <script>
+        function atualizarSigla() {
+            var categoriaSelect = document.getElementById("categoria");
+            var categoriaSelectionada = categoriaSelect.options[categoriaSelect.selectedIndex].text;
+            var siglaInput = document.getElementById("sigla");
+
+            fetch('equipamento/getSiglaByCategoria?categoria=' + encodeURIComponent(categoriaSelectionada))
+                .then(response => response.text())
+                .then(sigla => {
+                    if (sigla) {
+                        siglaInput.value = sigla;
+                        siglaInput.readOnly = true;
+                    } else {
+                        siglaInput.value = '';
+                        siglaInput.readOnly = false;
+                    }
+                })
+                .catch(error => console.error('Error ao obter a silga da categoria: ', error));
+        }
+    </script>
+
 </head>
 
 <body>
@@ -23,18 +46,34 @@
         <input type="hidden" name="id" th:value="${equipamento?.id}">
 
         <div>
+            <label for="categoria">
+                Categoria:
+            </label>
+            <a href="/categoria/formulario" class="btn">Cadastrar categoria</a>
+            <select id="categoria" name="categoria" onchange="atualizarSigla()">
+                <option value="">Selecione a categoria</option>
+                <option th:each="categoria : ${categorias}" th:value="${categoria.nome}" th:selected="${
+            equipamento != null and equipamento.categoria == categoria
+        }" th:data-sigla="${categoria.sigla}">
+                    <span th:text="${categoria.nome}"></span>
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label for="sigla">
+                Sigla:
+            </label>
+            <input id="sigla" name="sigla" th:value="${equipamento?.sigla}">
+        </div>
+
+        <div>
             <label for="tag">
-                Tag:
+                Tag Nº:
             </label>
             <input id="tag" name="tag" th:value="${equipamento?.tag}">
         </div>
 
-        <div>
-            <label for="categoria">
-                Categoria:
-            </label>
-            <input id="categoria" name="categoria" th:value="${equipamento?.categoria}">
-        </div>
 
         <div>
             <label for="rfid">
@@ -47,7 +86,7 @@
             <label for="habilitar">
                 Habilitar:
             </label>
-            <input id="habilitar" name="habilitar" type="checkbox" th:checked="${equipamento?.habilitar}">
+            <input id="habilitar" name="habilitar" type="checkbox" th:checked="${equipamento?.habilitar}" >
         </div>
 
 

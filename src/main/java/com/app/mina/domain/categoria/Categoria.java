@@ -9,12 +9,12 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String tag;
+    private String sigla;
     private String nome;
 
 
     public Categoria(DadosCadastroCategoria dados) {
-        this.tag = dados.tag();
+        this.sigla = dados.sigla();
         this.nome = dados.nome();
     }
 
@@ -23,7 +23,7 @@ public class Categoria {
     @Override
     public String toString() {
         return "Categoria{" +
-                "tag='" + tag + '\'' +
+                "tag='" + sigla + '\'' +
                 ", nome='" + nome + '\'' +
                 '}';
     }
@@ -32,8 +32,8 @@ public class Categoria {
         return id;
     }
 
-    public String getTag() {
-        return tag;
+    public String getSigla() {
+        return sigla;
     }
 
     public String getNome() {
@@ -41,7 +41,7 @@ public class Categoria {
     }
 
     public void atualizaDados(DadosAlteracaoCategoria dados) {
-        this.tag = dados.tag();
+        this.sigla = dados.sigla();
         this.nome = dados.nome();
     }
 }

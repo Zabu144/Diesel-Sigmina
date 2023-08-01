@@ -19,16 +19,16 @@
     <table>
         <thead>
         <tr>
-            <th>TAG</th>
             <th>NOME</th>
+            <th>SIGLA</th>
             <th>AÇÕES</th>
         </tr>
         </thead>
 
         <tbody>
         <tr th:each="categoria : ${lista}">
-            <td th:text="${categoria.tag}"></td>
             <td th:text="${categoria.nome}"></td>
+            <td th:text="${categoria.sigla}"></td>
 
             <td>
                 <a th:href="@{/categoria/formulario?id={id}(id=${categoria.id})}">Editar</a>
