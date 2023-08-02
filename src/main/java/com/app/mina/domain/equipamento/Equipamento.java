@@ -15,8 +15,9 @@ public class Equipamento {
     private Boolean habilitar;
     private String empresa;
     private String custos;
-    private String sigla;
+    private String sigla_cat_FK;
     private String cnpj;
+    private String descricao;
 
     public Equipamento(DadosCadastroEquipamento dados) {
         this.tag = dados.tag();
@@ -25,8 +26,9 @@ public class Equipamento {
         this.habilitar = dados.habilitar();
         this.empresa = dados.empresa();
         this.custos = dados.custos();
-        this.sigla = dados.sigla();
+        this.sigla_cat_FK = dados.sigla_cat_FK();
         this.cnpj = dados.cnpj();
+        this.descricao = dados.descricao();
     }
 
     public Equipamento(){}
@@ -41,8 +43,9 @@ public class Equipamento {
                 ", habilitar=" + habilitar +
                 ", empresa='" + empresa + '\'' +
                 ", custos='" + custos + '\'' +
-                ", sigla='" + sigla + '\'' +
+                ", sigla_cat_FK='" + sigla_cat_FK + '\'' +
                 ", cnpj='" + cnpj + '\'' +
+                ", descricao='" + descricao + '\'' +
                 '}';
     }
 
@@ -73,11 +76,14 @@ public class Equipamento {
     public String getCustos() {
         return custos;
     }
-    public String getSigla() {
-        return sigla;
+    public String getSigla_cat_FK() {
+        return sigla_cat_FK;
     }
     public String getCnpj() {
         return cnpj;
+    }
+    public String getDescricao() {
+        return descricao;
     }
 
     public void atualizaDados(DadosAlteracaoEquipamento dados) {
@@ -87,7 +93,8 @@ public class Equipamento {
         this.habilitar = dados.habilitar();
         this.empresa = dados.empresa();
         this.custos = dados.custos();
-        this.sigla = dados.sigla();
+        this.sigla_cat_FK = dados.sigla_cat_FK();
         this.cnpj = dados.cnpj();
+        this.descricao = dados.descricao();
     }
 }

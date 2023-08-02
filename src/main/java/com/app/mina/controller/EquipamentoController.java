@@ -87,13 +87,35 @@ public class EquipamentoController {
         return "redirect:/equipamento";
     }
 
-    //Método para lidar com a requisição AJAX e retornar as informações da categoria em outros formulários
+    //Métodos para lidar com a requisição AJAX e retornar as informações da categoria em outros formulários
     @GetMapping("getSiglaByCategoria")
     @ResponseBody
     public ResponseEntity<String> getSiglaByCategoria(@RequestParam("categoria") String categoria) {
         Categoria categoriaSelecionada = categoriaRepository.findByNome(categoria);
         if (categoriaSelecionada != null) {
             return ResponseEntity.ok(categoriaSelecionada.getSigla());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("getCnpjByEmpresa")
+    @ResponseBody
+    public ResponseEntity<String> getCnpjByEmpresa(@RequestParam("empresa") String empresa) {
+        Empresa empresaSelecionada = empresaRepository.findByNome(empresa);
+        if (empresaSelecionada != null) {
+            return ResponseEntity.ok(empresaSelecionada.getCnpj());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("getDescricaoByCustos")
+    @ResponseBody
+    public ResponseEntity<String> getDescricaoByCustos(@RequestParam("custos") String custos) {
+        Custos custosSelecionada = custosRepository.findByCodigo(custos);
+        if (custosSelecionada != null) {
+            return ResponseEntity.ok(custosSelecionada.getDescricao());
         } else {
             return ResponseEntity.notFound().build();
         }

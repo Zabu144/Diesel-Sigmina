@@ -13,7 +13,7 @@
         function atualizarSigla() {
             var categoriaSelect = document.getElementById("categoria");
             var categoriaSelectionada = categoriaSelect.options[categoriaSelect.selectedIndex].text;
-            var siglaInput = document.getElementById("sigla");
+            var siglaInput = document.getElementById("sigla_cat_FK");
 
             fetch('equipamento/getSiglaByCategoria?categoria=' + encodeURIComponent(categoriaSelectionada))
                 .then(response => response.text())
@@ -26,7 +26,45 @@
                         siglaInput.readOnly = false;
                     }
                 })
-                .catch(error => console.error('Error ao obter a silga da categoria: ', error));
+                .catch(error => console.error('Erro ao obter a silga da categoria: ', error));
+        }
+
+        function atualizarCnpj() {
+            var empresaSelect = document.getElementById('empresa');
+            var empresaSelectionada = empresaSelect.options[empresaSelect.selectedIndex].text;
+            var cnpjInput = document.getElementById('cnpj');
+
+            fetch('equipamento/getCnpjByEmpresa?empresa=' + encodeURIComponent(empresaSelectionada))
+                .then(response => response.text())
+                .then(cnpj => {
+                    if (cnpj) {
+                        cnpjInput.value = cnpj;
+                        cnpjInput.readOnly = true;
+                    } else {
+                        cnpjInput.value = '';
+                        cnpjInput.readOnly = false;
+                    }
+                })
+                .catch(error => console.error('Erro ao obter o cnpj da empresa: ', error))
+        }
+
+        function atualizarDescricao() {
+            var custosSelect = document.getElementById('custos');
+            var custosSelectionado = custosSelect.options[custosSelect.selectedIndex].text;
+            var descricaoInput = document.getElementById('descricao');
+
+            fetch('equipamento/getDescricaoByCustos?custos=' + encodeURIComponent(custosSelectionado))
+                .then(response => response.text())
+                .then(descricao => {
+                    if (descricao) {
+                        descricaoInput.value = descricao;
+                        descricaoInput.readOnly = true;
+                    } else {
+                        descricaoInput.value = '';
+                        descricaoInput.readOnly = false;
+                    }
+                })
+                .catch(error => console.error("Erro ao obter a descricao da empresa"))
         }
     </script>
 
@@ -61,17 +99,17 @@
         </div>
 
         <div>
-            <label for="sigla">
+            <label for="sigla_cat_FK">
                 Sigla:
             </label>
-            <input id="sigla" name="sigla" th:value="${equipamento?.sigla}">
+            <input id="sigla_cat_FK" name="sigla_cat_FK" th:value="${equipamento?.sigla_cat_FK}" autocomplete="off">
         </div>
 
         <div>
             <label for="tag">
                 Tag Nº:
             </label>
-            <input id="tag" name="tag" th:value="${equipamento?.tag}">
+            <input id="tag" name="tag" th:value="${equipamento?.tag}" autocomplete="off">
         </div>
 
 
@@ -79,7 +117,7 @@
             <label for="rfid">
                 RFID:
             </label>
-            <input id="rfid" name="rfid" th:value="${equipamento?.rfid}">
+            <input id="rfid" name="rfid" th:value="${equipamento?.rfid}" autocomplete="off">
         </div>
 
         <div>
@@ -95,7 +133,7 @@
                 Empresa:
             </label>
             <a href="/empresa/formulario" class="btn">Cadastrar empresa</a>
-            <select id="empresa" name="empresa">
+            <select id="empresa" name="empresa" onchange="atualizarCnpj()">
                 <option value="">Selecione a empresa</option>
                 <option th:each="empresa : ${empresas}" th:value="${empresa.nome}" th:selected="${
                         equipamento != null and equipamento.empresa == empresa
@@ -106,11 +144,18 @@
         </div>
 
         <div>
+            <label for="cnpj">
+                Cnpj:
+            </label>
+            <input id="cnpj" name="cnpj" th:value="${equipamento?.cnpj}" autocomplete="off">
+        </div>
+
+        <div>
             <label for="custos">
                 Código CC:
             </label>
             <a href="/custos/formulario" class="btn">Cadastrar Centro de custo</a>
-            <select id="custos" name="custos">
+            <select id="custos" name="custos" onchange="atualizarDescricao()">
                 <option value="">Selecione o código CC</option>
                 <option th:each="custos : ${custo}" th:value="${custos.codigo}" th:selected="${
                         equipamento != null and equipamento.custos == custos
@@ -118,6 +163,13 @@
                     <span th:text="${custos.codigo}"></span>
                 </option>
             </select>
+        </div>
+
+        <div>
+            <label for="descricao">
+                Descrição:
+            </label>
+            <input id="descricao" name="descricao" th:value="${equipamento?.descricao}" autocomplete="off">
         </div>
 
         <input type="submit" value="Cadastrar">

@@ -25,7 +25,9 @@
             <th>RFID</th>
             <th>HABILITAR</th>
             <th>EMPRESA</th>
+            <th>CNPJ</th>
             <th>COD. CC</th>
+            <th>DESCRIÇÃO</th>
             <th>AÇÕES</th>
         </tr>
         </thead>
@@ -33,14 +35,16 @@
         <tbody>
         <tr th:each="equipamento : ${lista}">
             <td th:text="${equipamento.categoria}"></td>
-            <td th:text="${equipamento.sigla}"></td>
+            <td th:text="${equipamento.sigla_cat_FK}"></td>
             <td th:text="${equipamento.tag}"></td>
             <td th:text="${equipamento.rfid}"></td>
             <td>
                 <span th:text="${equipamento.habilitar != null && equipamento.habilitar ? 'Sim' : 'Não'}"></span>
             </td>
             <td th:text="${equipamento.empresa}"></td>
+            <td th:text="${equipamento.cnpj}"></td>
             <td th:text="${equipamento.custos}"></td>
+            <td th:text="${equipamento.descricao}"></td>
 
             <td>
                 <a th:href="@{/equipamento/formulario?id={id}(id=${equipamento.id})}">Editar</a>
