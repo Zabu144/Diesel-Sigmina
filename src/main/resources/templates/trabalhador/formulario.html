@@ -7,6 +7,25 @@
 <head>
     <base href="/" />
     <title>Cadastro de trabalhador</title>
+
+    <script>
+        function validarFormularioTrabalhador() {
+            var empresaSelect = document.getElementById("empresa");
+
+            var errorMenssage = '';
+
+            if (empresaSelect.value === "") {
+                errorMenssage += 'Empresa é obrigatória. ';
+                empresaSelect.style.borderColor = 'red';
+            } else {
+                empresaSelect.style.borderColor = '';
+            }
+
+            document.getElementById('error-menssage').textContent = errorMenssage;
+            return errorMenssage === '';
+        }
+    </script>
+
 </head>
 <body>
     <div layout:fragment="conteudo">
@@ -16,7 +35,7 @@
 
         <a href="home/page">Voltar para Home</a>
 
-        <form method="post" action="/trabalhador">
+        <form method="post" action="/trabalhador" onsubmit="return validarFormularioTrabalhador()">
 
             <input type="hidden" name="_method" value="put" th:if="${trabalhador != null}">
             <input type="hidden" name="id" th:value="${trabalhador?.id}">
@@ -74,6 +93,9 @@
             <input type="submit" value="Cadastrar">
 
         </form>
+
+        <div id="error-menssage" style="color: red;"></div>
+
     </div>
 </body>
 </html>
