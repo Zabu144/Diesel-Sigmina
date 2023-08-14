@@ -13,7 +13,7 @@
         Lista de centro de custo
     </h1>
 
-    <a href="/custos/formulario">Novo</a>
+    <a href="/ccRef/formulario">Novo</a>
     <a href="home/page">Voltar para Home</a>
 
     <table>
@@ -26,16 +26,16 @@
         </thead>
 
         <tbody>
-        <tr th:each="custos : ${lista}">
-            <td th:text="${custos.codigo}"></td>
-            <td th:text="${custos.descricao}"></td>
+        <tr th:each="ccRef : ${lista}">
+            <td th:text="${ccRef.codigo}"></td>
+            <td th:text="${ccRef.descricao}"></td>
 
             <td>
-                <a th:href="@{/custos/formulario?id={id}(id=${custos.id})}">Editar</a>
+                <a th:href="@{/ccRef/formulario?id={id}(id=${ccRef.id})}">Editar</a>
 
-                <form action="/custos" method="post">
+                <form action="/ccRef" method="post">
                     <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="id" th:value="${custos.id}">
+                    <input type="hidden" name="id" th:value="${ccRef.id}">
 
                     <input type="submit" value="Excluir">
                 </form>

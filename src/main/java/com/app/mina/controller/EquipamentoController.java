@@ -2,8 +2,8 @@ package com.app.mina.controller;
 
 import com.app.mina.domain.categoria.Categoria;
 import com.app.mina.domain.categoria.CategoriaRepository;
-import com.app.mina.domain.custos.Custos;
-import com.app.mina.domain.custos.CustosRepository;
+import com.app.mina.domain.ccRef.CcRef;
+import com.app.mina.domain.ccRef.CcRefRepository;
 import com.app.mina.domain.empresa.Empresa;
 import com.app.mina.domain.empresa.EmpresaRepository;
 import com.app.mina.domain.equipamento.DadosAlteracaoEquipamento;
@@ -30,7 +30,7 @@ public class EquipamentoController {
     private EmpresaRepository empresaRepository;
 
     @Autowired
-    private CustosRepository custosRepository;
+    private CcRefRepository ccRefRepository;
 
     @Autowired
     private CategoriaRepository categoriaRepository;
@@ -45,8 +45,8 @@ public class EquipamentoController {
         List<Empresa> empresas = empresaRepository.findAll();
         model.addAttribute("empresas", empresas);
 
-        List<Custos> custo = custosRepository.findAll();
-        model.addAttribute("custo", custo);
+        List<CcRef> ccRef = ccRefRepository.findAll();
+        model.addAttribute("ccRef", ccRef);
 
         List<Categoria> categorias = categoriaRepository.findAll();
         model.addAttribute("categorias", categorias);
@@ -110,12 +110,12 @@ public class EquipamentoController {
         }
     }
 
-    @GetMapping("getDescricaoByCustos")
+    @GetMapping("getDescricaoByCcRef")
     @ResponseBody
-    public ResponseEntity<String> getDescricaoByCustos(@RequestParam("custos") String custos) {
-        Custos custosSelecionada = custosRepository.findByCodigo(custos);
-        if (custosSelecionada != null) {
-            return ResponseEntity.ok(custosSelecionada.getDescricao());
+    public ResponseEntity<String> getDescricaoByCcRef(@RequestParam("ccRef") String ccRef) {
+        CcRef ccRefSelecionada = ccRefRepository.findByCodigo(ccRef);
+        if (ccRefSelecionada != null) {
+            return ResponseEntity.ok(ccRefSelecionada.getDescricao());
         } else {
             return ResponseEntity.notFound().build();
         }
