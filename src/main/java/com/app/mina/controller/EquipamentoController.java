@@ -2,10 +2,10 @@ package com.app.mina.controller;
 
 import com.app.mina.domain.categoria.Categoria;
 import com.app.mina.domain.categoria.CategoriaRepository;
-import com.app.mina.domain.ccRef.CcRef;
-import com.app.mina.domain.ccRef.CcRefRepository;
-import com.app.mina.domain.empresa.Empresa;
-import com.app.mina.domain.empresa.EmpresaRepository;
+import com.app.mina.domain.cc_ref.Cc_ref;
+import com.app.mina.domain.cc_ref.Cc_refRepository;
+import com.app.mina.domain.empresa_ref.Empresa_ref;
+import com.app.mina.domain.empresa_ref.Empresa_refRepository;
 import com.app.mina.domain.equipamento.DadosAlteracaoEquipamento;
 import com.app.mina.domain.equipamento.DadosCadastroEquipamento;
 import com.app.mina.domain.equipamento.Equipamento;
@@ -27,10 +27,10 @@ public class EquipamentoController {
     private EquipamentoRepository repository;
 
     @Autowired
-    private EmpresaRepository empresaRepository;
+    private Empresa_refRepository empresaRefRepository;
 
     @Autowired
-    private CcRefRepository ccRefRepository;
+    private Cc_refRepository ccrefRepository;
 
     @Autowired
     private CategoriaRepository categoriaRepository;
@@ -42,11 +42,11 @@ public class EquipamentoController {
             model.addAttribute("equipamento", equipamento);
         }
 
-        List<Empresa> empresas = empresaRepository.findAll();
-        model.addAttribute("empresas", empresas);
+        List<Empresa_ref> empresaRefs = empresaRefRepository.findAll();
+        model.addAttribute("EmpresaRefs", empresaRefs);
 
-        List<CcRef> ccRef = ccRefRepository.findAll();
-        model.addAttribute("ccRef", ccRef);
+        List<Cc_ref> ccref = ccrefRepository.findAll();
+        model.addAttribute("ccRef", ccref);
 
         List<Categoria> categorias = categoriaRepository.findAll();
         model.addAttribute("categorias", categorias);
@@ -99,12 +99,12 @@ public class EquipamentoController {
         }
     }
 
-    @GetMapping("getCnpjByEmpresa")
+    @GetMapping("getCnpjByEmpresaRef")
     @ResponseBody
-    public ResponseEntity<String> getCnpjByEmpresa(@RequestParam("empresa") String empresa) {
-        Empresa empresaSelecionada = empresaRepository.findByNome(empresa);
-        if (empresaSelecionada != null) {
-            return ResponseEntity.ok(empresaSelecionada.getCnpj());
+    public ResponseEntity<String> getCnpjByEmpresaRef(@RequestParam("EmpresaRef") String empresaRef) {
+        Empresa_ref empresaRefSelecionada = empresaRefRepository.findByNome(empresaRef);
+        if (empresaRefSelecionada != null) {
+            return ResponseEntity.ok(empresaRefSelecionada.getCnpj());
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -113,9 +113,9 @@ public class EquipamentoController {
     @GetMapping("getDescricaoByCcRef")
     @ResponseBody
     public ResponseEntity<String> getDescricaoByCcRef(@RequestParam("ccRef") String ccRef) {
-        CcRef ccRefSelecionada = ccRefRepository.findByCodigo(ccRef);
-        if (ccRefSelecionada != null) {
-            return ResponseEntity.ok(ccRefSelecionada.getDescricao());
+        Cc_ref ccrefSelecionada = ccrefRepository.findByCodigo(ccRef);
+        if (ccrefSelecionada != null) {
+            return ResponseEntity.ok(ccrefSelecionada.getDescricao());
         } else {
             return ResponseEntity.notFound().build();
         }

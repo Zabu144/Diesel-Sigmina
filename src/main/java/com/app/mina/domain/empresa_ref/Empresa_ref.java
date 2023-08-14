@@ -1,9 +1,9 @@
-package com.app.mina.domain.empresa;
+package com.app.mina.domain.empresa_ref;
 
 import jakarta.persistence.*;
 @Entity
-@Table(name = "empresa")
-public class Empresa {
+@Table(name = "empresa_ref")
+public class Empresa_ref {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,17 +12,17 @@ public class Empresa {
     private String cnpj;
     private Boolean habilitar;
 
-    public Empresa(DadosCadastroEmpresa dados) {
+    public Empresa_ref(DadosCadastroEmpresa_ref dados) {
         this.nome = dados.nome();
         this.cnpj = dados.cnpj();
         this.habilitar = dados.habilitar();
     }
 
-    public Empresa() {}
+    public Empresa_ref() {}
 
     @Override
     public String toString() {
-        return "Empresa{" +
+        return "Empresa_ref{" +
                 ", nome='" + nome + '\'' +
                 ", cnpj='" + cnpj + '\'' +
                 ", habilitar=" + habilitar +
@@ -45,7 +45,7 @@ public class Empresa {
         return habilitar;
     }
 
-    public void atualizaDados(DadosAlteracaoEmpresa dados) {
+    public void atualizaDados(DadosAlteracaoEmpresa_ref dados) {
         this.nome = dados.nome();
         this.cnpj = dados.cnpj();
         this.habilitar = dados.habilitar();

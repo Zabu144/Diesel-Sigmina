@@ -1,9 +1,9 @@
-package com.app.mina.domain.ccRef;
+package com.app.mina.domain.cc_ref;
 
 import jakarta.persistence.*;
 @Entity
-@Table(name = "ccRef")
-public class CcRef {
+@Table(name = "cc_ref")
+public class Cc_ref {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,16 +11,16 @@ public class CcRef {
     private String codigo;
     private String descricao;
 
-    public CcRef(DadosCadastroCcRef dados) {
+    public Cc_ref(DadosCadastroCc_ref dados) {
         this.codigo = dados.codigo();
         this.descricao = dados.descricao();
     }
 
-    public CcRef() {}
+    public Cc_ref() {}
 
     @Override
     public String toString() {
-        return "CcRef{" +
+        return "Cc_ref{" +
                 ", codigo='" + codigo + '\'' +
                 ", descricao='" + descricao + '\'' +
                 '}';
@@ -38,7 +38,7 @@ public class CcRef {
         return descricao;
     }
 
-    public void atualizaDados(DadosAlteracaoCcRef dados) {
+    public void atualizaDados(DadosAlteracaoCc_ref dados) {
         this.codigo = dados.codigo();
         this.descricao = dados.descricao();
     }

@@ -13,7 +13,7 @@
     Lista de empresa
   </h1>
 
-  <a href="/empresa/formulario">Novo</a>
+  <a href="/empresa_ref/formulario">Novo</a>
   <a href="home/page">Voltar para Home</a>
 
   <table>
@@ -27,19 +27,19 @@
     </thead>
 
     <tbody>
-    <tr th:each="empresa : ${lista}">
-      <td th:text="${empresa.nome}"></td>
-      <td th:text="${empresa.cnpj}"></td>
+    <tr th:each="empresa_ref : ${lista}">
+      <td th:text="${empresa_ref.nome}"></td>
+      <td th:text="${empresa_ref.cnpj}"></td>
       <td>
-        <span th:text="${empresa.habilitar != null && empresa.habilitar ? 'Sim' : 'Não'}"></span>
+        <span th:text="${empresa_ref.habilitar != null && empresa_ref.habilitar ? 'Sim' : 'Não'}"></span>
       </td>
 
       <td>
-        <a th:href="@{/empresa/formulario?id={id}(id=${empresa.id})}">Editar</a>
+        <a th:href="@{/empresa_ref/formulario?id={id}(id=${empresa_ref.id})}">Editar</a>
 
-        <form action="/empresa" method="post">
+        <form action="/empresa_ref" method="post">
           <input type="hidden" name="_method" value="delete">
-          <input type="hidden" name="id" th:value="${empresa.id}">
+          <input type="hidden" name="id" th:value="${empresa_ref.id}">
 
           <input type="submit" value="Excluir">
         </form>

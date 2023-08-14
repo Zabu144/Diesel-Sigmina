@@ -1,7 +1,7 @@
 package com.app.mina.controller;
 
-import com.app.mina.domain.empresa.Empresa;
-import com.app.mina.domain.empresa.EmpresaRepository;
+import com.app.mina.domain.empresa_ref.Empresa_ref;
+import com.app.mina.domain.empresa_ref.Empresa_refRepository;
 import com.app.mina.domain.trabalhador.DadosAlteracaoTrabalhador;
 import com.app.mina.domain.trabalhador.DadosCadastroTrabalhador;
 import com.app.mina.domain.trabalhador.Trabalhador;
@@ -22,7 +22,7 @@ public class TrabalhadorController {
     private TrabalhadorRepository repository;
 
     @Autowired
-    private EmpresaRepository empresaRepository;
+    private Empresa_refRepository empresaRefRepository;
 
 
     @GetMapping("/formulario")
@@ -32,8 +32,8 @@ public class TrabalhadorController {
             model.addAttribute("trabalhador", trabalhador);
         }
 
-        List<Empresa> empresas = empresaRepository.findAll();
-        model.addAttribute("empresas", empresas);
+        List<Empresa_ref> empresaRefs = empresaRefRepository.findAll();
+        model.addAttribute("EmpresaRefs", empresaRefs);
 
         return "trabalhador/formulario";
     }

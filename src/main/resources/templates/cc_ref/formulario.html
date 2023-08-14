@@ -17,23 +17,23 @@
 
     <a href="home/page">Voltar para Home</a>
 
-    <form method="post" action="/ccRef">
+    <form method="post" action="/cc_ref">
 
-        <input type="hidden" name="_method" value="put" th:if="${ccRef != null}">
-        <input type="hidden" name="id" th:value="${ccRef?.id}">
+        <input type="hidden" name="_method" value="put" th:if="${cc_ref != null}">
+        <input type="hidden" name="id" th:value="${cc_ref?.id}">
 
         <div>
             <label for="codigo">
                 Código centro de custo:
             </label>
-            <input id="codigo" name="codigo" th:value="${ccRef?.codigo}" autocomplete="off">
+            <input id="codigo" name="codigo" th:value="${cc_ref?.codigo}" autocomplete="off">
         </div>
 
         <div>
             <label for="descricao">
                 Descrição centro de custo:
             </label>
-            <input id="descricao" name="descricao" th:value="${ccRef?.descricao}" autocomplete="off">
+            <input id="descricao" name="descricao" th:value="${cc_ref?.descricao}" autocomplete="off">
         </div>
 
 
