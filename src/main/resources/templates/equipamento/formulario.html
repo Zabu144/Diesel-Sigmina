@@ -11,11 +11,11 @@
 
     <script>
         function atualizarSigla() {
-            var categoriaSelect = document.getElementById("categoria");
-            var categoriaSelectionada = categoriaSelect.options[categoriaSelect.selectedIndex].text;
+            var categoria_refSelect = document.getElementById("categoria_ref");
+            var categoria_refSelectionada = categoria_refSelect.options[categoria_refSelect.selectedIndex].text;
             var siglaInput = document.getElementById("sigla_cat_FK");
 
-            fetch('equipamento/getSiglaByCategoria?categoria=' + encodeURIComponent(categoriaSelectionada))
+            fetch('equipamento/getSiglaByCategoria_ref?categoria_ref=' + encodeURIComponent(categoria_refSelectionada))
                 .then(response => response.text())
                 .then(sigla => {
                     if (sigla) {
@@ -26,15 +26,15 @@
                         siglaInput.readOnly = false;
                     }
                 })
-                .catch(error => console.error('Erro ao obter a silga da categoria: ', error));
+                .catch(error => console.error('Erro ao obter a silga da categoria_ref: ', error));
         }
 
         function atualizarCnpj() {
-            var empresaSelect = document.getElementById('empresa');
-            var empresaSelectionada = empresaSelect.options[empresaSelect.selectedIndex].text;
+            var empresa_refSelect = document.getElementById('empresa_ref');
+            var empresa_refSelectionada = empresa_refSelect.options[empresa_refSelect.selectedIndex].text;
             var cnpjInput = document.getElementById('cnpj');
 
-            fetch('equipamento/getCnpjByEmpresa?empresa=' + encodeURIComponent(empresaSelectionada))
+            fetch('equipamento/getCnpjByEmpresa_ref?empresa_ref=' + encodeURIComponent(empresa_refSelectionada))
                 .then(response => response.text())
                 .then(cnpj => {
                     if (cnpj) {
@@ -45,15 +45,15 @@
                         cnpjInput.readOnly = false;
                     }
                 })
-                .catch(error => console.error('Erro ao obter o cnpj da empresa: ', error))
+                .catch(error => console.error('Erro ao obter o cnpj da empresa_ref: ', error))
         }
 
         function atualizarDescricao() {
-            var custosSelect = document.getElementById('custos');
-            var custosSelectionado = custosSelect.options[custosSelect.selectedIndex].text;
+            var cc_refSelect = document.getElementById('cc_ref');
+            var cc_refSelectionado = cc_refSelect.options[cc_refSelect.selectedIndex].text;
             var descricaoInput = document.getElementById('descricao');
 
-            fetch('equipamento/getDescricaoByCustos?custos=' + encodeURIComponent(custosSelectionado))
+            fetch('equipamento/getDescricaoByCc_ref?cc_ref=' + encodeURIComponent(cc_refSelectionado))
                 .then(response => response.text())
                 .then(descricao => {
                     if (descricao) {
@@ -64,35 +64,35 @@
                         descricaoInput.readOnly = false;
                     }
                 })
-                .catch(error => console.error("Erro ao obter a descricao da empresa"))
+                .catch(error => console.error("Erro ao obter a descricao da empresa_ref"))
         }
 
         function validarFormularioEquipamento() {
-            var categoriaSelect = document.getElementById("categoria");
-            var empresaSelect = document.getElementById("empresa");
-            var custosSelect = document.getElementById("custos");
+            var categoria_refSelect = document.getElementById("categoria_ref");
+            var empresa_refSelect = document.getElementById("empresa_ref");
+            var cc_refSelect = document.getElementById("cc_ref");
 
             var errorMessage = '';
 
-            if (categoriaSelect.value === "") {
-                errorMessage += 'Categoria é obrigatória. ';
-                categoriaSelect.style.borderColor = 'red';
+            if (categoria_refSelect.value === "") {
+                errorMessage += 'Categoria_ref é obrigatória. ';
+                categoria_refSelect.style.borderColor = 'red';
             } else {
-                categoriaSelect.style.borderColor = '';
+                categoria_refSelect.style.borderColor = '';
             }
 
-            if (empresaSelect.value === "") {
-                errorMessage += 'Empresa é obrigatória. ';
-                empresaSelect.style.borderColor = 'red';
+            if (empresa_refSelect.value === "") {
+                errorMessage += 'Empresa_ref é obrigatória. ';
+                empresa_refSelect.style.borderColor = 'red';
             } else {
-                empresaSelect.style.borderColor = '';
+                empresa_refSelect.style.borderColor = '';
             }
 
-            if (custosSelect.value === "") {
-                errorMessage += 'Custos é obrigatório. ';
-                custosSelect.style.borderColor = 'red';
+            if (cc_refSelect.value === "") {
+                errorMessage += 'Cc_ref é obrigatório. ';
+                cc_refSelect.style.borderColor = 'red';
             } else {
-                custosSelect.style.borderColor = '';
+                cc_refSelect.style.borderColor = '';
             }
 
             document.getElementById('error-message').textContent = errorMessage;
@@ -117,16 +117,16 @@
         <input type="hidden" name="id" th:value="${equipamento?.id}">
 
         <div>
-            <label for="categoria">
+            <label for="categoria_ref">
                 Categoria:
             </label>
-            <a href="/categoria/formulario" class="btn">Cadastrar categoria</a>
-            <select id="categoria" name="categoria" onchange="atualizarSigla()">
+            <a href="/categoria_ref/formulario" class="btn">Cadastrar categoria</a>
+            <select id="categoria_ref" name="categoria_ref" onchange="atualizarSigla()">
                 <option value="">Selecione a categoria</option>
-                <option th:each="categoria : ${categorias}" th:value="${categoria.nome}" th:selected="${
-            equipamento != null and equipamento.categoria == categoria
-        }" th:data-sigla="${categoria.sigla}">
-                    <span th:text="${categoria.nome}"></span>
+                <option th:each="categoria_ref : ${categoria_refs}" th:value="${categoria_ref.nome}" th:selected="${
+            equipamento != null and equipamento.categoria_ref == categoria_ref
+        }" th:data-sigla="${categoria_ref.sigla}">
+                    <span th:text="${categoria_ref.nome}"></span>
                 </option>
             </select>
         </div>
@@ -162,16 +162,16 @@
 
 
         <div>
-            <label for="empresa">
+            <label for="empresa_ref">
                 Empresa:
             </label>
-            <a href="/empresa/formulario" class="btn">Cadastrar empresa</a>
-            <select id="empresa" name="empresa" onchange="atualizarCnpj()">
+            <a href="/empresa_ref/formulario" class="btn">Cadastrar empresa</a>
+            <select id="empresa_ref" name="empresa_ref" onchange="atualizarCnpj()">
                 <option value="">Selecione a empresa</option>
-                <option th:each="empresa : ${empresas}" th:value="${empresa.nome}" th:selected="${
-                        equipamento != null and equipamento.empresa == empresa
+                <option th:each="empresa_ref : ${empresa_refs}" th:value="${empresa_ref.nome}" th:selected="${
+                        equipamento != null and equipamento.empresa_ref == empresa_ref
                     }">
-                    <span th:text="${empresa.nome}"></span>
+                    <span th:text="${empresa_ref.nome}"></span>
                 </option>
             </select>
         </div>
@@ -184,16 +184,16 @@
         </div>
 
         <div>
-            <label for="custos">
+            <label for="cc_ref">
                 Código CC:
             </label>
-            <a href="/custos/formulario" class="btn">Cadastrar Centro de custo</a>
-            <select id="custos" name="custos" onchange="atualizarDescricao()">
+            <a href="/cc_ref/formulario" class="btn">Cadastrar Centro de custo</a>
+            <select id="cc_ref" name="cc_ref" onchange="atualizarDescricao()">
                 <option value="">Selecione o código CC</option>
-                <option th:each="custos : ${custo}" th:value="${custos.codigo}" th:selected="${
-                        equipamento != null and equipamento.custos == custos
+                <option th:each="cc_ref : ${cc_refs}" th:value="${cc_ref.codigo}" th:selected="${
+                        equipamento != null and equipamento.cc_ref == cc_ref
                     }">
-                    <span th:text="${custos.codigo}"></span>
+                    <span th:text="${cc_ref.codigo}"></span>
                 </option>
             </select>
         </div>

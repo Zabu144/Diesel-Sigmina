@@ -5,15 +5,15 @@
       layout:decorate="~{template.html}"
 >
 <head>
-    <title>Lista de categoria</title>
+    <title>Lista de categoria_ref</title>
 </head>
 <body>
 <div layout:fragment="conteudo">
     <h1>
-        Lista de categoria
+        Lista de categoria_ref
     </h1>
 
-    <a href="/categoria/formulario">Novo</a>
+    <a href="/categoria_ref/formulario">Novo</a>
     <a href="home/page">Voltar para Home</a>
 
     <table>
@@ -26,16 +26,16 @@
         </thead>
 
         <tbody>
-        <tr th:each="categoria : ${lista}">
-            <td th:text="${categoria.nome}"></td>
-            <td th:text="${categoria.sigla}"></td>
+        <tr th:each="categoria_ref : ${lista}">
+            <td th:text="${categoria_ref.nome}"></td>
+            <td th:text="${categoria_ref.sigla}"></td>
 
             <td>
-                <a th:href="@{/categoria/formulario?id={id}(id=${categoria.id})}">Editar</a>
+                <a th:href="@{/categoria_ref/formulario?id={id}(id=${categoria_ref.id})}">Editar</a>
 
-                <form action="/categoria" method="post">
+                <form action="/categoria_ref" method="post">
                     <input type="hidden" name="_method" value="delete">
-                    <input type="hidden" name="id" th:value="${categoria.id}">
+                    <input type="hidden" name="id" th:value="${categoria_ref.id}">
 
                     <input type="submit" value="Excluir">
                 </form>

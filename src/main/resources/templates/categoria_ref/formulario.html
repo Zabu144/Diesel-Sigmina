@@ -17,23 +17,23 @@
 
     <a href="home/page">Voltar para Home</a>
 
-    <form method="post" action="/categoria">
+    <form method="post" action="/categoria_ref">
 
-        <input type="hidden" name="_method" value="put" th:if="${categoria != null}">
-        <input type="hidden" name="id" th:value="${categoria?.id}">
+        <input type="hidden" name="_method" value="put" th:if="${categoria_ref != null}">
+        <input type="hidden" name="id" th:value="${categoria_ref?.id}">
 
         <div>
             <label for="nome">
                 Nome:
             </label>
-            <input id="nome" name="nome" th:value="${categoria?.nome}" autocomplete="off">
+            <input id="nome" name="nome" th:value="${categoria_ref?.nome}" autocomplete="off">
         </div>
 
         <div>
             <label for="sigla">
                 Sigla:
             </label>
-            <input id="sigla" name="sigla" th:value="${categoria?.sigla}" autocomplete="off">
+            <input id="sigla" name="sigla" th:value="${categoria_ref?.sigla}" autocomplete="off">
         </div>
 
 

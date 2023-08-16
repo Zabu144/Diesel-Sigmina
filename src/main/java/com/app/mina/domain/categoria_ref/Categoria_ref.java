@@ -1,10 +1,10 @@
-package com.app.mina.domain.categoria;
+package com.app.mina.domain.categoria_ref;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name= "categoria")
-public class Categoria {
+@Table(name= "categoria_ref")
+public class Categoria_ref {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,16 +13,16 @@ public class Categoria {
     private String nome;
 
 
-    public Categoria(DadosCadastroCategoria dados) {
+    public Categoria_ref(DadosCadastroCategoria_ref dados) {
         this.sigla = dados.sigla();
         this.nome = dados.nome();
     }
 
-    public Categoria() {}
+    public Categoria_ref() {}
 
     @Override
     public String toString() {
-        return "Categoria{" +
+        return "Categoria_ref{" +
                 "tag='" + sigla + '\'' +
                 ", nome='" + nome + '\'' +
                 '}';
@@ -40,7 +40,7 @@ public class Categoria {
         return nome;
     }
 
-    public void atualizaDados(DadosAlteracaoCategoria dados) {
+    public void atualizaDados(DadosAlteracaoCategoria_ref dados) {
         this.sigla = dados.sigla();
         this.nome = dados.nome();
     }

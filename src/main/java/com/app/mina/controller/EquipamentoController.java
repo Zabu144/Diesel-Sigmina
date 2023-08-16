@@ -1,7 +1,7 @@
 package com.app.mina.controller;
 
-import com.app.mina.domain.categoria.Categoria;
-import com.app.mina.domain.categoria.CategoriaRepository;
+import com.app.mina.domain.categoria_ref.Categoria_ref;
+import com.app.mina.domain.categoria_ref.Categoria_refRepository;
 import com.app.mina.domain.cc_ref.Cc_ref;
 import com.app.mina.domain.cc_ref.Cc_refRepository;
 import com.app.mina.domain.empresa_ref.Empresa_ref;
@@ -27,13 +27,13 @@ public class EquipamentoController {
     private EquipamentoRepository repository;
 
     @Autowired
-    private Empresa_refRepository empresaRefRepository;
+    private Empresa_refRepository empresa_refRepository;
 
     @Autowired
-    private Cc_refRepository ccrefRepository;
+    private Cc_refRepository cc_refRepository;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private Categoria_refRepository categoria_refRepository;
 
     @GetMapping("/formulario")
     public String carregaPaginaFormulario(Long id, Model model) {
@@ -42,14 +42,14 @@ public class EquipamentoController {
             model.addAttribute("equipamento", equipamento);
         }
 
-        List<Empresa_ref> empresaRefs = empresaRefRepository.findAll();
-        model.addAttribute("EmpresaRefs", empresaRefs);
+        List<Empresa_ref> empresa_refs = empresa_refRepository.findAll();
+        model.addAttribute("empresa_refs", empresa_refs);
 
-        List<Cc_ref> ccref = ccrefRepository.findAll();
-        model.addAttribute("ccRef", ccref);
+        List<Cc_ref> cc_refs = cc_refRepository.findAll();
+        model.addAttribute("cc_refs", cc_refs);
 
-        List<Categoria> categorias = categoriaRepository.findAll();
-        model.addAttribute("categorias", categorias);
+        List<Categoria_ref> categoria_refs = categoria_refRepository.findAll();
+        model.addAttribute("categoria_refs", categoria_refs);
 
         return "equipamento/formulario";
     }
@@ -88,34 +88,34 @@ public class EquipamentoController {
     }
 
     //Métodos para lidar com a requisição AJAX e retornar as informações da categoria em outros formulários
-    @GetMapping("getSiglaByCategoria")
+    @GetMapping("getSiglaByCategoria_ref")
     @ResponseBody
-    public ResponseEntity<String> getSiglaByCategoria(@RequestParam("categoria") String categoria) {
-        Categoria categoriaSelecionada = categoriaRepository.findByNome(categoria);
-        if (categoriaSelecionada != null) {
-            return ResponseEntity.ok(categoriaSelecionada.getSigla());
+    public ResponseEntity<String> getSiglaByCategoria_ref(@RequestParam("categoria_ref") String categoria_ref) {
+        Categoria_ref categoria_refSelecionada = categoria_refRepository.findByNome(categoria_ref);
+        if (categoria_refSelecionada != null) {
+            return ResponseEntity.ok(categoria_refSelecionada.getSigla());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @GetMapping("getCnpjByEmpresaRef")
+    @GetMapping("getCnpjByEmpresa_ref")
     @ResponseBody
-    public ResponseEntity<String> getCnpjByEmpresaRef(@RequestParam("EmpresaRef") String empresaRef) {
-        Empresa_ref empresaRefSelecionada = empresaRefRepository.findByNome(empresaRef);
-        if (empresaRefSelecionada != null) {
-            return ResponseEntity.ok(empresaRefSelecionada.getCnpj());
+    public ResponseEntity<String> getCnpjByEmpresa_ref(@RequestParam("empresa_ref") String empresa_ref) {
+        Empresa_ref empresa_refSelecionada = empresa_refRepository.findByNome(empresa_ref);
+        if (empresa_refSelecionada != null) {
+            return ResponseEntity.ok(empresa_refSelecionada.getCnpj());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @GetMapping("getDescricaoByCcRef")
+    @GetMapping("getDescricaoByCc_ref")
     @ResponseBody
-    public ResponseEntity<String> getDescricaoByCcRef(@RequestParam("ccRef") String ccRef) {
-        Cc_ref ccrefSelecionada = ccrefRepository.findByCodigo(ccRef);
-        if (ccrefSelecionada != null) {
-            return ResponseEntity.ok(ccrefSelecionada.getDescricao());
+    public ResponseEntity<String> getDescricaoByCc_ref(@RequestParam("cc_ref") String cc_ref) {
+        Cc_ref cc_refSelecionada = cc_refRepository.findByCodigo(cc_ref);
+        if (cc_refSelecionada != null) {
+            return ResponseEntity.ok(cc_refSelecionada.getDescricao());
         } else {
             return ResponseEntity.notFound().build();
         }
