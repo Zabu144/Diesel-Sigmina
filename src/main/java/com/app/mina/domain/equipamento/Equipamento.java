@@ -10,22 +10,22 @@ public class Equipamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tag;
-    private String categoria;
+    private String categoria_ref;
     private String rfid;
     private Boolean habilitar;
-    private String empresa;
-    private String custos;
+    private String empresa_ref;
+    private String cc_ref;
     private String sigla_cat_FK;
     private String cnpj;
     private String descricao;
 
     public Equipamento(DadosCadastroEquipamento dados) {
         this.tag = dados.tag();
-        this.categoria = dados.categoria();
+        this.categoria_ref = dados.categoria_ref();
         this.rfid = dados.rfid();
         this.habilitar = dados.habilitar();
-        this.empresa = dados.empresa();
-        this.custos = dados.custos();
+        this.empresa_ref = dados.empresa_ref();
+        this.cc_ref = dados.cc_ref();
         this.sigla_cat_FK = dados.sigla_cat_FK();
         this.cnpj = dados.cnpj();
         this.descricao = dados.descricao();
@@ -38,11 +38,11 @@ public class Equipamento {
         return "Equipamento{" +
                 "id=" + id +
                 ", tag='" + tag + '\'' +
-                ", categoria='" + categoria + '\'' +
+                ", categoria_ref='" + categoria_ref + '\'' +
                 ", rfid='" + rfid + '\'' +
                 ", habilitar=" + habilitar +
-                ", empresa='" + empresa + '\'' +
-                ", custos='" + custos + '\'' +
+                ", empresa_ref='" + empresa_ref + '\'' +
+                ", cc_ref='" + cc_ref + '\'' +
                 ", sigla_cat_FK='" + sigla_cat_FK + '\'' +
                 ", cnpj='" + cnpj + '\'' +
                 ", descricao='" + descricao + '\'' +
@@ -58,7 +58,7 @@ public class Equipamento {
     }
 
     public String getCategoria() {
-        return categoria;
+        return categoria_ref;
     }
 
     public String getRfid() {
@@ -70,11 +70,11 @@ public class Equipamento {
     }
 
     public String getEmpresa() {
-        return empresa;
+        return empresa_ref;
     }
 
     public String getCustos() {
-        return custos;
+        return cc_ref;
     }
     public String getSigla_cat_FK() {
         return sigla_cat_FK;
@@ -88,11 +88,11 @@ public class Equipamento {
 
     public void atualizaDados(DadosAlteracaoEquipamento dados) {
         this.tag = dados.tag();
-        this.categoria = dados.categoria();
+        this.categoria_ref = dados.categoria_ref();
         this.rfid = dados.rfid();
         this.habilitar = dados.habilitar();
-        this.empresa = dados.empresa();
-        this.custos = dados.custos();
+        this.empresa_ref = dados.empresa_ref();
+        this.cc_ref = dados.cc_ref();
         this.sigla_cat_FK = dados.sigla_cat_FK();
         this.cnpj = dados.cnpj();
         this.descricao = dados.descricao();

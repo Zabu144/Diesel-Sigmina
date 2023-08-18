@@ -124,7 +124,7 @@
             <select id="categoria_ref" name="categoria_ref" onchange="atualizarSigla()">
                 <option value="">Selecione a categoria</option>
                 <option th:each="categoria_ref : ${categoria_refs}" th:value="${categoria_ref.nome}" th:selected="${
-            equipamento != null and equipamento.categoria_ref == categoria_ref
+            equipamento != null and equipamento.categoria == categoria_ref.nome
         }" th:data-sigla="${categoria_ref.sigla}">
                     <span th:text="${categoria_ref.nome}"></span>
                 </option>
@@ -169,7 +169,7 @@
             <select id="empresa_ref" name="empresa_ref" onchange="atualizarCnpj()">
                 <option value="">Selecione a empresa</option>
                 <option th:each="empresa_ref : ${empresa_refs}" th:value="${empresa_ref.nome}" th:selected="${
-                        equipamento != null and equipamento.empresa_ref == empresa_ref
+                        equipamento != null and equipamento.empresa == empresa_ref.nome
                     }">
                     <span th:text="${empresa_ref.nome}"></span>
                 </option>
@@ -191,7 +191,7 @@
             <select id="cc_ref" name="cc_ref" onchange="atualizarDescricao()">
                 <option value="">Selecione o código CC</option>
                 <option th:each="cc_ref : ${cc_refs}" th:value="${cc_ref.codigo}" th:selected="${
-                        equipamento != null and equipamento.cc_ref == cc_ref
+                        equipamento != null and equipamento.custos == cc_ref.codigo
                     }">
                     <span th:text="${cc_ref.codigo}"></span>
                 </option>

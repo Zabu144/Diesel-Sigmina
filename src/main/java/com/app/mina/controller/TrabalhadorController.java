@@ -22,7 +22,7 @@ public class TrabalhadorController {
     private TrabalhadorRepository repository;
 
     @Autowired
-    private Empresa_refRepository empresaRefRepository;
+    private Empresa_refRepository empresa_refRepository;
 
 
     @GetMapping("/formulario")
@@ -32,8 +32,8 @@ public class TrabalhadorController {
             model.addAttribute("trabalhador", trabalhador);
         }
 
-        List<Empresa_ref> empresaRefs = empresaRefRepository.findAll();
-        model.addAttribute("EmpresaRefs", empresaRefs);
+        List<Empresa_ref> empresa_refs = empresa_refRepository.findAll();
+        model.addAttribute("empresa_refs", empresa_refs);
 
         return "trabalhador/formulario";
     }

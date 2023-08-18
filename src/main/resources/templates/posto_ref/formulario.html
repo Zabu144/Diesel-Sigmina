@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <base href="/" />
+    <title>Cadastro de Posto</title>
+</head>
+
+<body>
+<div layout:fragment="conteudo">
+    <h1>
+        Cadastro de Posto
+    </h1>
+
+    <a href="home/page">Voltar para Home</a>
+
+    <form method="post" action="/posto_ref">
+
+        <input type="hidden" name="_method" value="put" th:if="${posto_ref != null}">
+        <input type="hidden" name="id" th:value="${posto_ref?.id}">
+
+        <div>
+            <label for="tipo">
+                Tipo:
+            </label>
+            <select id="tipo" name="tipo">
+                <option value="">Selecione o tipo</option>
+                <option value="POSTO">POSTO</option>
+                <option value="COMBOIO">COMBOIO</option>
+            </select>
+
+        </div>
+
+        <div>
+            <label for="descricao">
+                Descricao:
+            </label>
+            <input id="descricao" name="descricao" th:value="${posto_ref?.descricao}" autocomplete="off">
+        </div>
+
+        <div>
+            <label for="sigla">
+                Sigla:
+            </label>
+            <input id="sigla" name="sigla" th:value="${posto_ref?.sigla}" autocomplete="off">
+        </div>
+
+        <div>
+            <label for="equipamento">
+                Tag do Equipamento:
+            </label>
+            <a href="/equipamento/formulario" class="btn">Cadastrar Equipamento</a>
+            <select id="equipamento" name="equipamento">
+                <option value="">Selecione a Tag</option>
+                <option th:each="equipamento : ${equipamentos}" th:value="${equipamento.tag}" th:selected="${
+    posto_ref != null and posto_ref.equipamento != null and posto_ref.equipamento == equipamento
+                }">
+
+                <span th:text="${equipamento.tag}"></span>
+                </option>
+            </select>
+
+        </div>
+
+
+        <input type="submit" value="Cadastrar">
+
+    </form>
+</div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 package com.app.mina.domain.equipamento;
 
-public record DadosCadastroEquipamento(String tag, String categoria, String rfid, Boolean habilitar, String empresa, String custos, String sigla_cat_FK, String cnpj, String descricao) {
+public record DadosCadastroEquipamento(String tag, String categoria_ref, String rfid, Boolean habilitar, String empresa_ref, String cc_ref, String sigla_cat_FK, String cnpj, String descricao) {
 
 }
