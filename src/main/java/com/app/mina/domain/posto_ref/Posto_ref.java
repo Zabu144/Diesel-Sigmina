@@ -12,13 +12,13 @@ public class Posto_ref {
     private String tipo;
     private String descricao;
     private String sigla;
-    private String tag_eqp_fk;
+    private String equipamento;
 
     public Posto_ref(DadosCadastroPosto_ref dados) {
         this.tipo = dados.tipo();
         this.descricao = dados.descricao();
         this.sigla = dados.sigla();
-        this.tag_eqp_fk = dados.tag_eqp_fk();
+        this.equipamento = dados.equipamento();
     }
 
     public Posto_ref(){}
@@ -30,7 +30,7 @@ public class Posto_ref {
                 ", tipo='" + tipo + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", sigla='" + sigla + '\'' +
-                ", tag_eqp_fk='" + tag_eqp_fk + '\'' +
+                ", equipamento='" + equipamento + '\'' +
                 '}';
     }
 
@@ -51,13 +51,13 @@ public class Posto_ref {
     }
 
     public String getTag_eqp_fk() {
-        return tag_eqp_fk;
+        return equipamento;
     }
 
     public void atualizaDados(DadosAlteracaoPosto_ref dados) {
         this.tipo = dados.tipo();
         this.descricao = dados.descricao();
         this.sigla = dados.sigla();
-        this.tag_eqp_fk = dados.tag_eqp_fk();
+        this.equipamento = dados.equipamento();
     }
 }

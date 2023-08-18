@@ -56,7 +56,7 @@
             <select id="equipamento" name="equipamento">
                 <option value="">Selecione a Tag</option>
                 <option th:each="equipamento : ${equipamentos}" th:value="${equipamento.tag}" th:selected="${
-    posto_ref != null and posto_ref.equipamento != null and posto_ref.equipamento == equipamento
+    posto_ref != null and posto_ref.tag_eqp_fk != null and posto_ref.tag_eqp_fk == equipamento.tag
                 }">
 
                 <span th:text="${equipamento.tag}"></span>

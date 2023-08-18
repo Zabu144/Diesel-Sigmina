@@ -1,0 +1,78 @@
+[1mdiff --git a/src/main/java/com/app/mina/domain/posto_ref/DadosAlteracaoPosto_ref.java b/src/main/java/com/app/mina/domain/posto_ref/DadosAlteracaoPosto_ref.java[m
+[1mindex 64776d1..5e7d482 100644[m
+[1m--- a/src/main/java/com/app/mina/domain/posto_ref/DadosAlteracaoPosto_ref.java[m
+[1m+++ b/src/main/java/com/app/mina/domain/posto_ref/DadosAlteracaoPosto_ref.java[m
+[36m@@ -1,4 +1,4 @@[m
+ package com.app.mina.domain.posto_ref;[m
+ [m
+[31m-public record DadosAlteracaoPosto_ref(Long id, String tipo, String descricao, String sigla, String tag_eqp_fk) {[m
+[32m+[m[32mpublic record DadosAlteracaoPosto_ref(Long id, String tipo, String descricao, String sigla, String equipamento) {[m
+ }[m
+[1mdiff --git a/src/main/java/com/app/mina/domain/posto_ref/DadosCadastroPosto_ref.java b/src/main/java/com/app/mina/domain/posto_ref/DadosCadastroPosto_ref.java[m
+[1mindex 0f7b73e..0b0bf1a 100644[m
+[1m--- a/src/main/java/com/app/mina/domain/posto_ref/DadosCadastroPosto_ref.java[m
+[1m+++ b/src/main/java/com/app/mina/domain/posto_ref/DadosCadastroPosto_ref.java[m
+[36m@@ -1,4 +1,4 @@[m
+ package com.app.mina.domain.posto_ref;[m
+ [m
+[31m-public record DadosCadastroPosto_ref(String tipo, String descricao, String sigla, String tag_eqp_fk) {[m
+[32m+[m[32mpublic record DadosCadastroPosto_ref(String tipo, String descricao, String sigla, String equipamento) {[m
+ }[m
+[1mdiff --git a/src/main/java/com/app/mina/domain/posto_ref/Posto_ref.java b/src/main/java/com/app/mina/domain/posto_ref/Posto_ref.java[m
+[1mindex ac0334b..4985861 100644[m
+[1m--- a/src/main/java/com/app/mina/domain/posto_ref/Posto_ref.java[m
+[1m+++ b/src/main/java/com/app/mina/domain/posto_ref/Posto_ref.java[m
+[36m@@ -12,13 +12,13 @@[m [mpublic class Posto_ref {[m
+     private String tipo;[m
+     private String descricao;[m
+     private String sigla;[m
+[31m-    private String tag_eqp_fk;[m
+[32m+[m[32m    private String equipamento;[m
+ [m
+     public Posto_ref(DadosCadastroPosto_ref dados) {[m
+         this.tipo = dados.tipo();[m
+         this.descricao = dados.descricao();[m
+         this.sigla = dados.sigla();[m
+[31m-        this.tag_eqp_fk = dados.tag_eqp_fk();[m
+[32m+[m[32m        this.equipamento = dados.equipamento();[m
+     }[m
+ [m
+     public Posto_ref(){}[m
+[36m@@ -30,7 +30,7 @@[m [mpublic class Posto_ref {[m
+                 ", tipo='" + tipo + '\'' +[m
+                 ", descricao='" + descricao + '\'' +[m
+                 ", sigla='" + sigla + '\'' +[m
+[31m-                ", tag_eqp_fk='" + tag_eqp_fk + '\'' +[m
+[32m+[m[32m                ", equipamento='" + equipamento + '\'' +[m
+                 '}';[m
+     }[m
+ [m
+[36m@@ -51,13 +51,13 @@[m [mpublic class Posto_ref {[m
+     }[m
+ [m
+     public String getTag_eqp_fk() {[m
+[31m-        return tag_eqp_fk;[m
+[32m+[m[32m        return equipamento;[m
+     }[m
+ [m
+     public void atualizaDados(DadosAlteracaoPosto_ref dados) {[m
+         this.tipo = dados.tipo();[m
+         this.descricao = dados.descricao();[m
+         this.sigla = dados.sigla();[m
+[31m-        this.tag_eqp_fk = dados.tag_eqp_fk();[m
+[32m+[m[32m        this.equipamento = dados.equipamento();[m
+     }[m
+ }[m
+[1mdiff --git a/src/main/resources/templates/posto_ref/formulario.html b/src/main/resources/templates/posto_ref/formulario.html[m
+[1mindex 4b8a776..73031d0 100644[m
+[1m--- a/src/main/resources/templates/posto_ref/formulario.html[m
+[1m+++ b/src/main/resources/templates/posto_ref/formulario.html[m
+[36m@@ -56,7 +56,7 @@[m
+             <select id="equipamento" name="equipamento">[m
+                 <option value="">Selecione a Tag</option>[m
+                 <option th:each="equipamento : ${equipamentos}" th:value="${equipamento.tag}" th:selected="${[m
+[31m-    posto_ref != null and posto_ref.equipamento != null and posto_ref.equipamento == equipamento[m
+[32m+[m[32m    posto_ref != null and posto_ref.tag_eqp_fk != null and posto_ref.tag_eqp_fk == equipamento.tag[m
+                 }">[m
+ [m
+                 <span th:text="${equipamento.tag}"></span>[m
