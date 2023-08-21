@@ -104,7 +104,7 @@ create table abatecimento_posto
         references cc_ref
 );
 
-alter table abatecimento_posto
+alter table abastecimento_posto
     owner to postgres;
 
 create table posto_ref

@@ -111,7 +111,7 @@
 
     <a href="home/page">Voltar para Home</a>
 
-    <form method="post" action="/equipamento" onsubmit="return validarFormularioEquipamento()">
+    <form method="post" action="/equipamento" onsubmit="return validarFormularioEquipamento();">
 
         <input type="hidden" name="_method" value="put" th:if="${equipamento != null}">
         <input type="hidden" name="id" th:value="${equipamento?.id}">

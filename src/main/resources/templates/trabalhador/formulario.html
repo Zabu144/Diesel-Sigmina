@@ -10,19 +10,19 @@
 
     <script>
         function validarFormularioTrabalhador() {
-            var empresaSelect = document.getElementById("empresa");
+            var empresa_refSelect = document.getElementById("empresa_ref");
 
-            var errorMenssage = '';
+            var errorMessage = '';
 
-            if (empresaSelect.value === "") {
-                errorMenssage += 'Empresa é obrigatória. ';
-                empresaSelect.style.borderColor = 'red';
+            if (empresa_refSelect.value === "") {
+                errorMessage += 'Empresa é obrigatória. ';
+                empresa_refSelect.style.borderColor = 'red';
             } else {
-                empresaSelect.style.borderColor = '';
+                empresa_refSelect.style.borderColor = '';
             }
 
-            document.getElementById('error-menssage').textContent = errorMenssage;
-            return errorMenssage === '';
+            document.getElementById('error-message').textContent = errorMessage;
+            return errorMessage === '';
         }
     </script>
 
@@ -35,7 +35,8 @@
 
         <a href="home/page">Voltar para Home</a>
 
-        <form method="post" action="/trabalhador" onsubmit="return validarFormularioTrabalhador()">
+
+        <form method="post" action="/trabalhador" onsubmit="return validarFormularioTrabalhador();">
 
             <input type="hidden" name="_method" value="put" th:if="${trabalhador != null}">
             <input type="hidden" name="id" th:value="${trabalhador?.id}">
@@ -54,6 +55,7 @@
                 <input id="nome" name="nome" th:value="${trabalhador?.nome}" autocomplete="off">
             </div>
 
+            <div id="error-message" style="color: red;"></div>
             <div>
                 <label for="empresa_ref">
                     Empresa:
@@ -62,7 +64,7 @@
                 <select id="empresa_ref" name="empresa_ref">
                     <option value="">Selecione a empresa</option>
                     <option th:each="empresa_ref : ${empresa_refs}" th:value="${empresa_ref.nome}" th:selected="${
-                        trabalhador != null and trabalhador.empresa_ref == empresa_ref
+                        trabalhador != null and trabalhador.empresa == empresa_ref.nome
                     }">
                        <span th:text="${empresa_ref.nome}"></span>
                     </option>
@@ -93,8 +95,6 @@
             <input type="submit" value="Cadastrar">
 
         </form>
-
-        <div id="error-menssage" style="color: red;"></div>
 
     </div>
 </body>

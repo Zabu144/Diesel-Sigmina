@@ -7,6 +7,25 @@
 <head>
     <base href="/" />
     <title>Cadastro de Posto</title>
+
+    <script>
+
+        function validarFormularioPosto() {
+            var tagSelect = document.getElementById("equipamento");
+            var errorMessage = '';
+
+            if (tagSelect.value === "") {
+                errorMessage += 'Tag é obrigatória. ';
+                tagSelect.style.borderColor = 'red';
+            } else {
+                tagSelect.style.borderColor = '';
+            }
+
+            document.getElementById("error-message").textContent = errorMessage;
+            return errorMessage === '';
+        }
+
+    </script>
 </head>
 
 <body>
@@ -17,7 +36,7 @@
 
     <a href="home/page">Voltar para Home</a>
 
-    <form method="post" action="/posto_ref">
+    <form method="post" action="/posto_ref" onsubmit="return validarFormularioPosto();">
 
         <input type="hidden" name="_method" value="put" th:if="${posto_ref != null}">
         <input type="hidden" name="id" th:value="${posto_ref?.id}">
@@ -48,6 +67,7 @@
             <input id="sigla" name="sigla" th:value="${posto_ref?.sigla}" autocomplete="off">
         </div>
 
+        <div id="error-message" style="color: red;"></div>
         <div>
             <label for="equipamento">
                 Tag do Equipamento:
@@ -69,6 +89,8 @@
         <input type="submit" value="Cadastrar">
 
     </form>
+
+
 </div>
 </body>
 </html>
