@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <title>Registro de Abastecimento</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+    <h1>
+        Registro de abastecimento
+    </h1>
+
+    <a href="/abastecimento_posto/formulario">Novo</a>
+    <a href="home/page">Voltar para Home</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>DATA</th>
+            <th>LITROS</th>
+            <th>MAT. OPERÁRIO</th>
+            <th>TAG DO COMBOIO</th>
+            <th>CÓD. CC</th>
+            <th>AÇÕES</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="abastecimento_posto : ${lista}">
+            <td th:text="${abastecimento_posto.data_abastecimento}"></td>
+            <td th:text="${abastecimento_posto.litros}"></td>
+            <td th:text="${abastecimento_posto.equipamento}"></td>
+            <td th:text="${abastecimento_posto.trabalhador}"></td>
+            <td th:text="${abastecimento_posto.cc_ref}"></td>
+
+            <td>
+                <a th:href="@{/abastecimento_posto/formulario?id={id}(id=${abastecimento_posto.id})}">Editar</a>
+
+                <form action="/abastecimento_posto" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="id" th:value="${abastecimento_posto.id}">
+
+                    <input type="submit" value="Excluir">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

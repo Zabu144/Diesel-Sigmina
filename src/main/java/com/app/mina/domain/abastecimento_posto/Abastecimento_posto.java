@@ -12,11 +12,11 @@ public class Abastecimento_posto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date data_abastecimento;
+    private String data_abastecimento;
     private Double litros;
 
     // CHAVES ESTRANGEIRAS
-    private String equipamento; // tag_equipamento_fk
+    private String posto_ref; // tag_equipamento_fk
     private String trabalhador; // mat_tra_fk
     private String cc_ref; // cod_cc_fk
 
@@ -25,7 +25,7 @@ public class Abastecimento_posto {
     public Abastecimento_posto(DadosCadastroAbastecimento_posto dados){
         this.data_abastecimento = dados.data_abastecimento();
         this.litros = dados.litros();
-        this.equipamento = dados.equipamento();
+        this.posto_ref = dados.posto_ref();
         this.trabalhador = dados.trabalhador();
         this.cc_ref = dados.cc_ref();
     }
@@ -40,7 +40,7 @@ public class Abastecimento_posto {
                 "id=" + id +
                 ", data_abastecimento=" + data_abastecimento +
                 ", litros=" + litros +
-                ", equipamento='" + equipamento + '\'' +
+                ", posto_ref='" + posto_ref + '\'' +
                 ", trabalhador='" + trabalhador + '\'' +
                 ", cc_ref='" + cc_ref + '\'' +
                 '}';
@@ -52,7 +52,7 @@ public class Abastecimento_posto {
         return id;
     }
 
-    public Date getData_abastecimento() {
+    public String getData_abastecimento() {
         return data_abastecimento;
     }
 
@@ -61,7 +61,7 @@ public class Abastecimento_posto {
     }
 
     public String getEquipamento() {
-        return equipamento;
+        return posto_ref;
     }
 
     public String getTrabalhador() {
@@ -76,7 +76,7 @@ public class Abastecimento_posto {
     public void atualizaDados(DadosAlteracaoAbastecimento_posto dados) {
         this.data_abastecimento = dados.data_abastecimento();
         this.litros = dados.litros();
-        this.equipamento = dados.equipamento();
+        this.posto_ref = dados.posto_ref();
         this.trabalhador = dados.trabalhador();
         this.cc_ref = dados.cc_ref();
     }

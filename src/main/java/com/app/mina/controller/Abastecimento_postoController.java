@@ -8,6 +8,8 @@ import com.app.mina.domain.cc_ref.Cc_ref;
 import com.app.mina.domain.cc_ref.Cc_refRepository;
 import com.app.mina.domain.equipamento.Equipamento;
 import com.app.mina.domain.equipamento.EquipamentoRepository;
+import com.app.mina.domain.posto_ref.Posto_ref;
+import com.app.mina.domain.posto_ref.Posto_refRepository;
 import com.app.mina.domain.trabalhador.Trabalhador;
 import com.app.mina.domain.trabalhador.TrabalhadorRepository;
 import jakarta.transaction.TransactionScoped;
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -35,6 +39,9 @@ public class Abastecimento_postoController {
     @Autowired
     private Cc_refRepository cc_refRepository;
 
+    @Autowired
+    private Posto_refRepository posto_refRepository;
+
     @GetMapping("/formulario")
     public String carregaPaginaFormulario(Long id, Model model) {
         if (id != null) {
@@ -50,6 +57,9 @@ public class Abastecimento_postoController {
 
         List<Cc_ref> cc_refs = cc_refRepository.findAll();
         model.addAttribute("cc_refs", cc_refs);
+
+        List<Posto_ref> posto_refs = posto_refRepository.findAll();
+        model.addAttribute("posto_refs", posto_refs);
 
         return "abastecimento_posto/formulario";
     }
@@ -83,6 +93,12 @@ public class Abastecimento_postoController {
     @Transactional
     public String removeAbastecimento_posto(Long id) {
         repository.deleteById(id);
+
+        return "redirect:/abastecimento_posto";
+    }
+
+    @PostMapping("/abastecimento_posto")
+    public String processForm(@RequestParam("data_abastecimento") String dataHoraString) {
 
         return "redirect:/abastecimento_posto";
     }

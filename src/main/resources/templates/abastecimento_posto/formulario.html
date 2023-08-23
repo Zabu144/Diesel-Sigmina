@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <base href="/" />
+    <title>Cadastro Abastecimento Posto</title>
+
+    <script>
+
+        function validarFormularioAbastecimento_posto() {
+            var posto_refSelect = document.getElementById("posto_ref");
+            var trabalhadorSelect = document.getElementById("trabalhador");
+            var cc_refSelect = document.getElementById("cc_ref");
+
+            var errorMessage = '';
+
+            if (posto_refSelect.value === "") {
+                errorMessage += 'Tag é obrigatório. ';
+                posto_refSelect.style.borderColor = 'red';
+            } else {
+                posto_refSelect.style.borderColor = '';
+            }
+
+            if (trabalhadorSelect.value === "") {
+                errorMessage += 'Trabalhador é obrigatório. ';
+                trabalhadorSelect.style.borderColor = 'red';
+            } else {
+                trabalhadorSelect.style.borderColor = '';
+            }
+
+            if (cc_refSelect.value === "") {
+                errorMessage += 'Código de cc é obrigatório. ';
+                cc_refSelect.style.borderColor = 'red';
+            } else {
+                cc_refSelect.style.borderColor = '';
+            }
+
+            document.getElementById("error-message").textContent = errorMessage;
+            return errorMessage === '';
+        }
+
+    </script>
+</head>
+
+<body>
+
+<div layout:fragment="conteudo">
+    <h1>
+        Cadastro de Abastecimento Posto
+    </h1>
+
+    <a href="home/page">Voltar para Home</a>
+
+    <form method="post" action="/abastecimento_posto" onsubmit="return validarFormularioAbastecimento_posto();">
+
+        <input type="hidden" name="_method" value="put" th:if="${abastecimento_posto != null}">
+        <input type="hidden" name="id" th:value="${abastecimento_posto?.id}">
+
+        <div>
+            <label for="data_abastecimento">
+                Data do Abastecimento:
+            </label>
+            <input type="datetime-local" id="data_abastecimento" name="data_abastecimento" th:value="${abastecimento_posto?.data_abastecimento}" required>
+
+
+        </div>
+
+        <div>
+            <label for="litros">
+                Litros:
+            </label>
+            <input id="litros" name="litros" th:value="${abastecimento_posto?.litros}" autocomplete="off">
+        </div>
+
+        <h2>Info. do Comboio abastecido</h2>
+
+        <div id="error-message" style="color: red;"></div>
+
+        <div>
+            <label for="trabalhador">
+                Matrícula do Operário:
+            </label>
+            <a href="/trabalhador/formulario" class="btn">Cadastrar Trabalhador</a>
+            <select id="trabalhador" name="trabalhador">
+                <option value="">Selecione a Mat. do Operário</option>
+                <option th:each="trabalhador : ${trabalhadors}" th:value="${trabalhador.matricula}" th:selected="${
+                abastecimento_posto != null  and abastecimento_posto.trabalhador == trabalhador.matricula
+                }">
+
+                    <span th:text="${trabalhador.matricula}"></span>
+                </option>
+
+            </select>
+        </div>
+
+        <div>
+            <label for="posto_ref">
+                Tag do Caminhão Comboio:
+            </label>
+            <a href="/equipamento/formulario" class="btn">Cadastrar  Equipamento</a>
+            <select id="posto_ref" name="posto_ref">
+                <option value="">Selecione a Tag do Comboio</option>
+                <option th:each="posto_ref : ${posto_refs}" th:value="${posto_ref.tag_eqp_fk}" th:selected="${
+                abastecimento_posto != null and abastecimento_posto.equipamento == posto_ref.tag_eqp_fk
+                }">
+
+                <span th:text="${posto_ref.tag_eqp_fk}"></span>
+                </option>
+
+
+            </select>
+        </div>
+
+        <div>
+            <label for="cc_ref">
+                Código CC:
+            </label>
+            <a href="/cc_ref/formulario" class="btn">Cadastrar Centro de custo</a>
+            <select id="cc_ref" name="cc_ref">
+                <option value="">Selecione o Cód. CC</option>
+                <option th:each="cc_ref : ${cc_refs}" th:value="${cc_ref.codigo}" th:selected="${
+                abastecimento_posto != null and abastecimento_posto.cc_ref == cc_ref.codigo
+                }">
+
+                <span th:text="${cc_ref.codigo}"></span>
+                </option>
+            </select>
+        </div>
+
+        <input type="submit" value="Cadastrar">
+
+    </form>
+
+</div>
+
+</body>
+</html>
