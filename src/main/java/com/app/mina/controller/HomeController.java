@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/home") // Mapeamento base para o Controller
 public class HomeController {
 
-    @GetMapping("page")
+    @GetMapping("page") // Manipula a requisição GET para a página home/page
     public String carregaPaginaHome() {
         return "home/page";
     }

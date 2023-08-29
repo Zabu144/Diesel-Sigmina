@@ -11,13 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/categoria_ref")
+@RequestMapping("/categoria_ref") // Mapeamento base para o Controller
 public class Categoria_refController {
 
+    // Injeção de dependências
     @Autowired
     private Categoria_refRepository repository;
 
-    @GetMapping("/formulario")
+    @GetMapping("/formulario") // Manipula a requisição GET para a página de formulário
     public String carregaPaginaFormulario(Long id, Model model) {
         if (id != null) {
             var categoria_ref = repository.getReferenceById(id);
@@ -26,13 +27,13 @@ public class Categoria_refController {
         return "categoria_ref/formulario";
     }
 
-    @GetMapping
+    @GetMapping // Manipula a requisição GET para a página de listagem
     public String carregaPaginaListagem(Model model) {
         model.addAttribute("lista", repository.findAll());
         return "categoria_ref/listagem";
     }
 
-    @PostMapping
+    @PostMapping // Manipula a requisição POST para cadastro
     @Transactional
     public String cadastraCategoria_ref(DadosCadastroCategoria_ref dados) {
         var categoria_ref = new Categoria_ref(dados);
@@ -42,7 +43,7 @@ public class Categoria_refController {
         return "redirect:/categoria_ref";
     }
 
-    @PutMapping
+    @PutMapping // Manipula a requisição PUT para alteração
     @Transactional
     public String alterarCategoria_ref(DadosAlteracaoCategoria_ref dados) {
         var categoria_ref = repository.getReferenceById(dados.id());
@@ -51,7 +52,7 @@ public class Categoria_refController {
         return "redirect:/categoria_ref";
     }
 
-    @DeleteMapping
+    @DeleteMapping // Manipula a requisição DELETE para remover
     @Transactional
     public String removeCategoria_ref(Long id) {
         repository.deleteById(id);

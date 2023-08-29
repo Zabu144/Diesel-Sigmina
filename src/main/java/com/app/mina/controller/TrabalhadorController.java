@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/trabalhador")
+@RequestMapping("/trabalhador") // Mapeamento base para o Controller
 public class TrabalhadorController {
 
+    // Injeção de dependências
     @Autowired
     private TrabalhadorRepository repository;
 
@@ -25,7 +26,7 @@ public class TrabalhadorController {
     private Empresa_refRepository empresa_refRepository;
 
 
-    @GetMapping("/formulario")
+    @GetMapping("/formulario") // Manipula a requisição GET para a página de formulário
     public String carregaPaginaFormulario(Long id, Model model) {
         if (id != null) {
             var trabalhador = repository.getReferenceById(id);
@@ -38,13 +39,13 @@ public class TrabalhadorController {
         return "trabalhador/formulario";
     }
 
-    @GetMapping
+    @GetMapping // Manipula a requisição GET para a página de listagem
     public String carregaPaginaListagem(Model model) {
         model.addAttribute("lista", repository.findAll());
         return "trabalhador/listagem";
     }
 
-    @PostMapping
+    @PostMapping // Manipula a requisição POST para cadastro
     @Transactional
     public String cadastraTrabalhador(DadosCadastroTrabalhador dados) {
         var trabalhador = new Trabalhador(dados);
@@ -54,7 +55,7 @@ public class TrabalhadorController {
         return "redirect:/trabalhador";
     }
 
-    @PutMapping
+    @PutMapping // Manipula a requisição PUT para alteração
     @Transactional
     public String alteraTrabalhador(DadosAlteracaoTrabalhador dados) {
         var trabalhador = repository.getReferenceById(dados.id());
@@ -63,7 +64,7 @@ public class TrabalhadorController {
         return "redirect:/trabalhador";
     }
 
-    @DeleteMapping
+    @DeleteMapping // Manipula a requisição DELETE para remover
     @Transactional
     public String removeTrabalhador(Long id) {
         repository.deleteById(id);

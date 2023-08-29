@@ -11,14 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/empresa_ref")
+@RequestMapping("/empresa_ref") // Mapeamento base para o Controller
 public class Empresa_refController {
 
+    // Injeção de dependências
     @Autowired
     private Empresa_refRepository repository;
 
 
-    @GetMapping("/formulario")
+    @GetMapping("/formulario") // Manipula a requisição GET para a página de formulário
     public String carregaPaginaFormulario(Long id, Model model) {
         if (id != null) {
             var empresa_ref = repository.getReferenceById(id);
@@ -27,13 +28,13 @@ public class Empresa_refController {
         return "empresa_ref/formulario";
     }
 
-    @GetMapping
+    @GetMapping // Manipula a requisição GET para a página de listagem
     public String carregaPaginaListagem(Model model) {
         model.addAttribute("lista", repository.findAll());
         return "empresa_ref/listagem";
     }
 
-    @PostMapping
+    @PostMapping // Manipula a requisição POST para cadastro
     @Transactional
     public String cadastraEmpresa_ref(DadosCadastroEmpresa_ref dados) {
         var empresa_ref = new Empresa_ref(dados);
@@ -43,7 +44,7 @@ public class Empresa_refController {
         return "redirect:/empresa_ref";
     }
 
-    @PutMapping
+    @PutMapping // Manipula a requisição PUT para alteração
     @Transactional
     public String alteraEmpresa_ref(DadosAlteracaoEmpresa_ref dados) {
         var empresa_ref = repository.getReferenceById(dados.id());
@@ -52,7 +53,7 @@ public class Empresa_refController {
         return "redirect:/empresa_ref";
     }
 
-    @DeleteMapping
+    @DeleteMapping // Manipula a requisição DELETE para remover
     @Transactional
     public String removeEmpresa_ref(Long id) {
         repository.deleteById(id);

@@ -22,9 +22,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/abastecimento_comboio")
+@RequestMapping("/abastecimento_comboio")  // Mapeamento base para o Controller
 public class Abastecimento_comboioController {
 
+    // Injeção de dependências
     @Autowired
     private Abastecimento_comboioRepository repository;
 
@@ -41,7 +42,7 @@ public class Abastecimento_comboioController {
     private Categoria_refRepository categoria_refRepository;
 
 
-    @GetMapping("/formulario")
+    @GetMapping("/formulario") // Manipula a requisição GET para a página de formulário
     public String carregaPaginaFormulario(Long id, Model model) {
         if (id != null) {
             var abastecimento_comboio = repository.getReferenceById(id);
@@ -63,13 +64,13 @@ public class Abastecimento_comboioController {
         return "abastecimento_comboio/formulario";
     }
 
-    @GetMapping
+    @GetMapping  // Manipula a requisição GET para a página de listagem
     public String carregaPaginaListagem(Model model) {
         model.addAttribute("lista", repository.findAll());
         return "abastecimento_comboio/listagem";
     }
 
-    @PostMapping
+    @PostMapping // Manipula a requisição POST para cadastro
     @Transactional
     public String cadastraAbastecimento_comboio(DadosCadastroAbastecimento_comboio dados) {
         var abastecimento_comboio = new Abastecimento_comboio(dados);
@@ -79,7 +80,7 @@ public class Abastecimento_comboioController {
         return "redirect:/abastecimento_comboio";
     }
 
-    @PutMapping
+    @PutMapping // Manipula a requisição PUT para alteração
     @Transactional
     public String alteraAbastecimento_comboio(DadosAlteracaoAbastecimento_comboio dados) {
         var abastecimento_comboio = repository.getReferenceById(dados.id());
@@ -88,7 +89,7 @@ public class Abastecimento_comboioController {
         return "redirect:/abastecimento_comboio";
     }
 
-    @DeleteMapping
+    @DeleteMapping // Manipula a requisição DELETE para remover
     @Transactional
     public String removeAbastecimento_comboio(Long id) {
         repository.deleteById(id);
@@ -96,7 +97,8 @@ public class Abastecimento_comboioController {
         return "redirect:/abastecimento_comboio";
     }
 
-    @GetMapping("getSiglaByCategoria_ref")
+    //Métodos para lidar com a requisição AJAX e retornar as informações da categoria em outros formulários
+    @GetMapping("getSiglaByCategoria_ref")  // Faz um GET na tabela categoria_ref para pegar a coluna sigla
     @ResponseBody
     public ResponseEntity<String> getSiglaByCategoria_ref(@RequestParam("categoria_ref") String categoria_ref) {
         Categoria_ref categoria_refSelecionada = categoria_refRepository.findByNome(categoria_ref);
@@ -107,7 +109,7 @@ public class Abastecimento_comboioController {
         }
     }
 
-    @PostMapping("/abastecimento_posto")
+    @PostMapping("/abastecimento_posto") // Manipula a requisição POST para processar um formulário de data e hora
     public String processForm(@RequestParam("data_abastecimento") String dataHoraString) {
 
         return "redirect:/abastecimento_posto";

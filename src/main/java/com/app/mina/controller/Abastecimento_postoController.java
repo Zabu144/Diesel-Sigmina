@@ -24,9 +24,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
-@RequestMapping("/abastecimento_posto")
+@RequestMapping("/abastecimento_posto") // Mapeamento base para o Controller
 public class Abastecimento_postoController {
 
+    // Injeção de dependências
     @Autowired
     private Abastecimento_postoRepository repository;
 
@@ -42,7 +43,7 @@ public class Abastecimento_postoController {
     @Autowired
     private Posto_refRepository posto_refRepository;
 
-    @GetMapping("/formulario")
+    @GetMapping("/formulario") // Manipula a requisição GET para a página de formulário
     public String carregaPaginaFormulario(Long id, Model model) {
         if (id != null) {
             var abastecimento_posto = repository.getReferenceById(id);
@@ -64,13 +65,13 @@ public class Abastecimento_postoController {
         return "abastecimento_posto/formulario";
     }
 
-    @GetMapping
+    @GetMapping // Manipula a requisição Get para a página de listagem
     public String carregaPaginaListagem(Model model) {
         model.addAttribute("lista", repository.findAll());
         return "abastecimento_posto/listagem";
     }
 
-    @PostMapping
+    @PostMapping // Manipula a requisição POST para cadastro
     @Transactional
     public String cadastraAbastecimento_posto(DadosCadastroAbastecimento_posto dados) {
         var abastecimento_posto = new Abastecimento_posto(dados);
@@ -80,7 +81,7 @@ public class Abastecimento_postoController {
         return "redirect:/abastecimento_posto";
     }
 
-    @PutMapping
+    @PutMapping // Manipula a requisição PUT para alteração
     @Transactional
     public String alteraAbastecimento_posto(DadosAlteracaoAbastecimento_posto dados) {
         var abastecimento_posto = repository.getReferenceById(dados.id());
@@ -89,7 +90,7 @@ public class Abastecimento_postoController {
         return "redirect:/abastecimento_posto";
     }
 
-    @DeleteMapping
+    @DeleteMapping // Manipula a requisiçãop DELETE para remover
     @Transactional
     public String removeAbastecimento_posto(Long id) {
         repository.deleteById(id);
@@ -97,7 +98,7 @@ public class Abastecimento_postoController {
         return "redirect:/abastecimento_posto";
     }
 
-    @PostMapping("/abastecimento_posto")
+    @PostMapping("/abastecimento_posto") // Manipula a requisição POST para processar um formulário de data e hora
     public String processForm(@RequestParam("data_abastecimento") String dataHoraString) {
 
         return "redirect:/abastecimento_posto";

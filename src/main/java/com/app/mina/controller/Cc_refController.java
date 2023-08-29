@@ -11,13 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/cc_ref")
+@RequestMapping("/cc_ref") // Mapeamento base para o Controller
 public class Cc_refController {
 
+    // Injeção de dependências
     @Autowired
     private Cc_refRepository repository;
 
-    @GetMapping("/formulario")
+    @GetMapping("/formulario") // Manipula a requisição GET para a página de formulário
     public String carregaPaginaFormulario(Long id, Model model) {
         if (id != null) {
             var cc_ref = repository.getReferenceById(id);
@@ -26,13 +27,13 @@ public class Cc_refController {
         return "cc_ref/formulario";
     }
 
-    @GetMapping
+    @GetMapping // Manipula a requisição GET para a página de listagem
     public String carregaPaginaListagem(Model model) {
         model.addAttribute("lista", repository.findAll());
         return "cc_ref/listagem";
     }
 
-    @PostMapping
+    @PostMapping // Manipula a requisição POST para cadastro
     @Transactional
     public String cadastraCc_ref(DadosCadastroCc_ref dados) {
         var cc_ref = new Cc_ref(dados);
@@ -42,7 +43,7 @@ public class Cc_refController {
         return "redirect:/cc_ref";
     }
 
-    @PutMapping
+    @PutMapping // Manipula a requisição PUT para alteração
     @Transactional
     public String alteraCc_ref(DadosAlteracaoCc_ref dados) {
         var cc_ref = repository.getReferenceById(dados.id());
@@ -51,7 +52,7 @@ public class Cc_refController {
         return "redirect:/cc_ref";
     }
 
-    @DeleteMapping
+    @DeleteMapping // Manipula a requisição DELETE para remover
     @Transactional
     public String removeCc_ref(Long id) {
         repository.deleteById(id);

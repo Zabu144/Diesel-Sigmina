@@ -20,9 +20,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/equipamento")
+@RequestMapping("/equipamento") // Mapeamento base para o Controller
 public class EquipamentoController {
 
+    // Injeção de dependências
     @Autowired
     private EquipamentoRepository repository;
 
@@ -35,7 +36,7 @@ public class EquipamentoController {
     @Autowired
     private Categoria_refRepository categoria_refRepository;
 
-    @GetMapping("/formulario")
+    @GetMapping("/formulario") // Manipula a requisição GET para a página de formulário
     public String carregaPaginaFormulario(Long id, Model model) {
         if (id != null) {
             var equipamento = repository.getReferenceById(id);
@@ -54,13 +55,13 @@ public class EquipamentoController {
         return "equipamento/formulario";
     }
 
-    @GetMapping
+    @GetMapping // Manipula a requisição GET para a página de listagem
     public String carregaPaginaListagem(Model model) {
         model.addAttribute("lista", repository.findAll());
         return "equipamento/listagem";
     }
 
-    @PostMapping
+    @PostMapping // Manipula a requisição POST para cadastro
     @Transactional
     public String cadastraEquipamento(DadosCadastroEquipamento dados) {
         var equipamento = new Equipamento(dados);
@@ -70,7 +71,7 @@ public class EquipamentoController {
         return "redirect:/equipamento";
     }
 
-    @PutMapping
+    @PutMapping // Manipula a requisição PUT para alteração
     @Transactional
     public String alteraEquipamento(DadosAlteracaoEquipamento dados) {
         var equipamento = repository.getReferenceById(dados.id());
@@ -79,7 +80,7 @@ public class EquipamentoController {
         return "redirect:/equipamento";
     }
 
-    @DeleteMapping
+    @DeleteMapping // Manipula a requisição DELETE para remover
     @Transactional
     public String removeEquipamento(Long id) {
         repository.deleteById(id);
@@ -87,8 +88,8 @@ public class EquipamentoController {
         return "redirect:/equipamento";
     }
 
-    //Métodos para lidar com a requisição AJAX e retornar as informações da categoria em outros formulários
-    @GetMapping("getSiglaByCategoria_ref")
+    //Métodos para lidar com a requisição AJAX e retornar as informações da categoria, empresas e Cc_ref em outros formulários
+    @GetMapping("getSiglaByCategoria_ref") // sigla -> tabela categoria_ref
     @ResponseBody
     public ResponseEntity<String> getSiglaByCategoria_ref(@RequestParam("categoria_ref") String categoria_ref) {
         Categoria_ref categoria_refSelecionada = categoria_refRepository.findByNome(categoria_ref);
@@ -99,7 +100,7 @@ public class EquipamentoController {
         }
     }
 
-    @GetMapping("getCnpjByEmpresa_ref")
+    @GetMapping("getCnpjByEmpresa_ref") // cnpj -> tabela empresa_ref
     @ResponseBody
     public ResponseEntity<String> getCnpjByEmpresa_ref(@RequestParam("empresa_ref") String empresa_ref) {
         Empresa_ref empresa_refSelecionada = empresa_refRepository.findByNome(empresa_ref);
@@ -110,7 +111,7 @@ public class EquipamentoController {
         }
     }
 
-    @GetMapping("getDescricaoByCc_ref")
+    @GetMapping("getDescricaoByCc_ref") // descrição -> tabela
     @ResponseBody
     public ResponseEntity<String> getDescricaoByCc_ref(@RequestParam("cc_ref") String cc_ref) {
         Cc_ref cc_refSelecionada = cc_refRepository.findByCodigo(cc_ref);
