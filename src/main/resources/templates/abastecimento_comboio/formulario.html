@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <base href="/" />
+    <title>Registro de Abastecimento no comboio</title>
+
+    <script>
+
+        function atualizarSigla() {
+            var descricaoSelect = document.getElementById("descricao");
+            var descricaoSelectionada = descricaoSelect.options[descricaoSelect.selectedIndex].text;
+            var siglaInput = document.getElementById("sigla_cat_fk");
+
+            fetch('equipamento/getSiglaByCategoria_ref?categoria_ref=' + encodeURIComponent(descricaoSelectionada))
+                .then(response => response.text())
+                .then(sigla => {
+                    if (sigla) {
+                        siglaInput.value = sigla;
+                        siglaInput.readOnly = true;
+                    } else {
+                        siglaInput.value = '';
+                        siglaInput.readOnly = false;
+                    }
+                })
+                .catch(error => console.error('Erro ao obter a silga da descricao: ', error));
+        }
+
+        function validarFormularioAbastecimento_comboio() {
+            var operador_comboioSelect = document.getElementById("operador_comboio");
+            var tag_comboioSelect = document.getElementById("tag_comboio");
+            var frentistaSelect = document.getElementById("frentista");
+            var descricaoSelect = document.getElementById("descricao");
+            var equipamentoSelect = document.getElementById("tag_eqp_fk");
+
+            var errorMessage = '';
+
+            if (operador_comboioSelect.value === "") {
+                errorMessage += 'Operador é obrigatorio! ';
+                operador_comboioSelect.style.borderColor = 'red';
+            } else {
+                operador_comboioSelect.style.borderColor = '';
+            }
+
+            if (tag_comboioSelect.value === "") {
+                errorMessage += 'Tag do comboio é obrigatoria! ';
+                tag_comboioSelect.style.borderColor = 'red';
+            } else {
+                tag_comboioSelect.style.borderColor = '';
+            }
+
+            if (frentistaSelect.value === "") {
+                errorMessage += 'Matricula é obrigatória! ';
+                frentistaSelect.style.borderColor = 'red';
+            } else {
+                frentistaSelect.style.borderColor = '';
+            }
+
+            if (descricaoSelect.value === "") {
+                errorMessage += 'Descrição é obrigatório! '
+                descricaoSelect.style.borderColor = 'red';
+            } else {
+                descricaoSelect.style.borderColor = '';
+            }
+
+            if (equipamentoSelect.value === "") {
+                errorMessage += 'Tag do equipamento é obrigatoria!';
+                equipamentoSelect.style.borderColor = 'red';
+            } else {
+                equipamentoSelect.style.borderColor = '';
+            }
+
+            document.getElementById('error-message').textContent = errorMessage;
+
+            return errorMessage === '';
+        }
+
+    </script>
+</head>
+<body>
+    <div layout:fragment="conteudo">
+        <h1>
+            Registro de Abastecimento no Comboio
+        </h1>
+
+        <a href="home/page">Voltar para Home</a>
+
+        <form method="post" action="/abastecimento_comboio" onsubmit="return validarFormularioAbastecimento_comboio();">
+
+            <input type="hidden" name="_method" value="put" th:if="${abastecimento != null}">
+            <input type="hidden" name="id" th:value="${abastecimento?.id}">
+
+            <div id="error-message" style="color: red;"></div>
+
+            <div>
+                <label for="data_abastecimento">
+                    Data do Abastecimento:
+                </label>
+                <input type="datetime-local" id="data_abastecimento" name="data_abastecimento" th:value="${abastecimento_comboio?.data_abastecimento}" required>
+
+            </div>
+
+            <div>
+                <label for="litros">
+                    Litros:
+                </label>
+                <input id="litros" name="litros" th:value="${abastecimento_comboio?.litros}" autocomplete="off">
+            </div>
+
+            <div>
+                <label for="operador_comboio">
+                    Operador do comboio:
+                </label>
+                <a href="/trabalhador/formulario" class="btn">Cadastrar Trabalhador</a>
+                <select id="operador_comboio" name="operador_comboio">
+                    <option value="">Selecione a Mat. do Operário</option>
+                    <option th:each="operador_comboio : ${trabalhadors}" th:value="${operador_comboio.matricula}" th:selected="${
+                    abastecimento_comboio != null and abastecimento_comboio.operador_comboio == operador_comboio.matricula
+                    }">
+                        <span th:text="${operador_comboio.matricula}"></span>
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label for="tag_comboio">
+                    Tag do comboio:
+                </label>
+                <a href="/equipamento/formulario" class="btn">Cadastrar Equipamento</a>
+                <select id="tag_comboio" name="tag_comboio">
+                    <option value="">Selecione a Tag</option>
+                    <option th:each="tag_comboio : ${posto_refs}" th:value="${tag_comboio.tag_eqp_fk}" th:selected="${
+                    abastecimento_comboio != null and abastecimento_comboio.tag_comboio == tag_comboio.tag_eqp_fk
+                    }">
+                        <span th:text="${tag_comboio.tag_eqp_fk}"></span>
+                    </option>
+
+                </select>
+            </div>
+
+            <h2>Dados do equipamento abastecido</h2>
+
+            <div>
+                <label for="frentista">
+                    Matrícula do frentista:
+                </label>
+                <a href="/trabalhador/formulario" class="btn">Cadastrar Trabalhador</a>
+                <select id="frentista" name="frentista">
+                    <option value="">Selecione a Matrícula</option>
+                    <option th:each="frentista : ${trabalhadors}" th:value="${frentista.matricula}" th:selected="${
+                    abastecimento_comboio != null and abastecimento_comboio.frentista == frentista.matricula
+                    }">
+                        <span th:text="${frentista.matricula}"></span>
+                    </option>
+
+                </select>
+            </div>
+
+            <div>
+                <label for="descricao">
+                    Descrição:
+                </label>
+                <a href="/categoria_ref/formulario" class="btn">Cadastrar Categoria</a>
+                <select id="descricao" name="descricao" onchange="atualizarSigla()">
+                    <option value="">Selecione a Descrição</option>
+                    <option th:each="descricao : ${categoria_refs}" th:value="${descricao.nome}" th:selected="${
+                    abastecimento_comboio != null and abastecimento_comboio.descricao == descricao.nome
+                    }" th:data-sigla="${descricao.sigla}">
+                        <span th:text="${descricao.nome}"></span>
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label for="sigla_cat_fk">
+                    Sigla:
+                </label>
+                <input id="sigla_cat_fk" name="sigla_cat_fk" th:value="${equipamento?.sigla_cat_fk}" autocomplete="off">
+            </div>
+
+            <div>
+                <label for="tag_eqp_fk">
+                    Tag do Equipamento:
+                </label>
+                <a href="/equipamento/formulario" class="btn">Cadastrar Equipamento</a>
+                <select id="tag_eqp_fk" name="tag_eqp_fk">
+                    <option value="">Selecione a Tag</option>
+                    <option th:each="tag_eqp_fk : ${equipamentos}" th:value="${tag_eqp_fk.tag}" th:selected="${
+                    abastecimento_comboio != null and abastecimento_comboio.tag_eqp_fk != tag_eqp_fk.tag
+                    }">
+                        <span th:text="${tag_eqp_fk.tag}"></span>
+                    </option>
+                </select>
+            </div>
+
+            <input type="submit" value="Cadastrar">
+
+        </form>
+ </div>
+</body>
+</html>

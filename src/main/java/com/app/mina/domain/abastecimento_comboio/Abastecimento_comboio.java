@@ -13,21 +13,22 @@ public class Abastecimento_comboio {
     private String data_abastecimento;
     private Double litros;
     private String operador_comboio;
-    private String posto_ref;
-    private String trabalhador;
-    private String categoria_ref;
+    private String tag_comboio;
+    private String frentista;
+    private String descricao;
     private String sigla_cat_fk;
-    private String equipamento;
+    private String tag_eqp_fk;
 
 
     public Abastecimento_comboio(DadosCadastroAbastecimento_comboio dados) {
         this.data_abastecimento = dados.data_abastecimento();
         this.litros = dados.litros();
         this.operador_comboio = dados.operador_comboio();
-        this.posto_ref = dados.posto_ref();
-        this.trabalhador = dados.trabalhador();
-        this.categoria_ref = dados.categoria_ref();
+        this.tag_comboio = dados.tag_comboio();
+        this.frentista = dados.frentista();
+        this.descricao = dados.descricao();
         this.sigla_cat_fk = dados.sigla_cat_fk();
+        this.tag_eqp_fk = dados.tag_eqp_fk();
     }
 
     public Abastecimento_comboio() {
@@ -41,11 +42,11 @@ public class Abastecimento_comboio {
                 ", data_abastecimento='" + data_abastecimento + '\'' +
                 ", litros=" + litros +
                 ", operador_comboio='" + operador_comboio + '\'' +
-                ", posto_ref='" + posto_ref + '\'' +
-                ", trabalhador='" + trabalhador + '\'' +
-                ", categoria_ref='" + categoria_ref + '\'' +
+                ", tag_comboio='" + tag_comboio + '\'' +
+                ", frentista='" + frentista + '\'' +
+                ", descricao='" + descricao + '\'' +
                 ", sigla_cat_fk='" + sigla_cat_fk + '\'' +
-                ", equipamento='" + equipamento + '\'' +
+                ", tag_eqp_fk='" + tag_eqp_fk + '\'' +
                 '}';
     }
 
@@ -65,33 +66,34 @@ public class Abastecimento_comboio {
         return operador_comboio;
     }
 
-    public String getPosto_ref() {
-        return posto_ref;
+    public String getTag_comboio() {
+        return tag_comboio;
     }
 
-    public String getTrabalhador() {
-        return trabalhador;
+    public String getFrentista() {
+        return frentista;
     }
 
-    public String getCategoria_ref() {
-        return categoria_ref;
+    public String getDescricao() {
+        return descricao;
     }
 
     public String getSigla_cat_fk() {
         return sigla_cat_fk;
     }
 
-    public String getEquipamento() {
-        return equipamento;
+    public String getTag_eqp_fk() {
+        return tag_eqp_fk;
     }
 
     public void atualizaDados(DadosAlteracaoAbastecimento_comboio dados) {
         this.data_abastecimento = dados.data_abastecimento();
         this.litros = dados.litros();
         this.operador_comboio = dados.operador_comboio();
-        this.posto_ref = dados.posto_ref();
-        this.trabalhador = dados.trabalhador();
-        this.categoria_ref = dados.categoria_ref();
+        this.tag_comboio = dados.tag_comboio();
+        this.frentista = dados.frentista();
+        this.descricao = dados.descricao();
         this.sigla_cat_fk = dados.sigla_cat_fk();
+        this.tag_eqp_fk = dados.tag_eqp_fk();
     }
 }

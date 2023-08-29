@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <title>Registro de Abastecimento no Comboio</title>
+</head>
+<body>
+<div layout:fragment="conteudo">
+    <h1>
+        Registro de abastecimento no Comboio
+    </h1>
+
+    <a href="/abastecimento_comboio/formulario">Novo</a>
+    <a href="home/page">Voltar para Home</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>DATA</th>
+            <th>LITROS</th>
+            <th>OPERADOR DO COMBOIO</th>
+            <th>TAG DO COMBOIO</th>
+            <th>FRENTISTA</th>
+            <th>DESCRIÇÃO</th>
+            <th>SIGLA</th>
+            <th>TAG DO EQP.</th>
+            <th>AÇÕES</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="abastecimento_comboio : ${lista}">
+            <td th:text="${abastecimento_comboio.data_abastecimento}"></td>
+            <td th:text="${abastecimento_comboio.litros}"></td>
+            <td th:text="${abastecimento_comboio.operador_comboio}"></td>
+            <td th:text="${abastecimento_comboio.tag_comboio}"></td>
+            <td th:text="${abastecimento_comboio.frentista}"></td>
+            <td th:text="${abastecimento_comboio.descricao}"></td>
+            <td th:text="${abastecimento_comboio.sigla_cat_fk}"></td>
+            <td th:text="${abastecimento_comboio.tag_eqp_fk}"></td>
+
+            <td>
+                <a th:href="@{/abastecimento_comboio/formulario?id={id}(id=${abastecimento_comboio.id})}">Editar</a>
+
+                <form action="/abastecimento_comboio" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="id" th:value="${abastecimento_comboio.id}">
+
+                    <input type="submit" value="Excluir">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -88,6 +88,14 @@ public class Abastecimento_comboioController {
         return "redirect:/abastecimento_comboio";
     }
 
+    @DeleteMapping
+    @Transactional
+    public String removeAbastecimento_comboio(Long id) {
+        repository.deleteById(id);
+
+        return "redirect:/abastecimento_comboio";
+    }
+
     @GetMapping("getSiglaByCategoria_ref")
     @ResponseBody
     public ResponseEntity<String> getSiglaByCategoria_ref(@RequestParam("categoria_ref") String categoria_ref) {
@@ -97,5 +105,11 @@ public class Abastecimento_comboioController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/abastecimento_posto")
+    public String processForm(@RequestParam("data_abastecimento") String dataHoraString) {
+
+        return "redirect:/abastecimento_posto";
     }
 }

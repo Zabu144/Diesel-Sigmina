@@ -11,7 +11,7 @@
     <script>
 
         function validarFormularioPosto() {
-            var tagSelect = document.getElementById("equipamento");
+            var tagSelect = document.getElementById("tag_eqp_fk");
             var errorMessage = '';
 
             if (tagSelect.value === "") {
@@ -69,17 +69,17 @@
 
         <div id="error-message" style="color: red;"></div>
         <div>
-            <label for="equipamento">
+            <label for="tag_eqp_fk">
                 Tag do Equipamento:
             </label>
             <a href="/equipamento/formulario" class="btn">Cadastrar Equipamento</a>
-            <select id="equipamento" name="equipamento">
+            <select id="tag_eqp_fk" name="tag_eqp_fk">
                 <option value="">Selecione a Tag</option>
-                <option th:each="equipamento : ${equipamentos}" th:value="${equipamento.tag}" th:selected="${
-    posto_ref != null and posto_ref.tag_eqp_fk != null and posto_ref.tag_eqp_fk == equipamento.tag
+                <option th:each="tag_eqp_fk : ${equipamentos}" th:value="${tag_eqp_fk.tag}" th:selected="${
+                posto_ref != null and posto_ref.tag_eqp_fk  == tag_eqp_fk.tag
                 }">
 
-                <span th:text="${equipamento.tag}"></span>
+                <span th:text="${tag_eqp_fk.tag}"></span>
                 </option>
             </select>
 
