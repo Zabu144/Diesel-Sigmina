@@ -145,6 +145,21 @@
             <h2>Dados do equipamento abastecido</h2>
 
             <div>
+                <label for="nome_emp_fk">
+                    Empresa:
+                </label>
+                <a href="/empresa_ref/formulario" class="btn">Cadastrar empresa</a>
+                <select id="nome_emp_fk" name="nome_emp_fk">
+                    <option value="">Selecione a empresa</option>
+                    <option th:each="nome_emp_fk : ${empresa_refs}" th:value="${nome_emp_fk.nome}" th:selected="${
+                        abastecimento_comboio != null and abastecimento_comboio.nome_emp_fk == nome_emp_fk.nome
+                    }">
+                        <span th:text="${nome_emp_fk.nome}"></span>
+                    </option>
+                </select>
+            </div>
+
+            <div>
                 <label for="frentista">
                     Matrícula do frentista:
                 </label>

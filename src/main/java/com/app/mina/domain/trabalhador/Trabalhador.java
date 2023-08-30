@@ -11,7 +11,7 @@ public class Trabalhador {
     private Long id;
     private String matricula;
     private String nome;
-    private String empresa;
+    private String nome_emp_fk;
     private String rfid;
     private String tipo;
     private Boolean habilitar;
@@ -19,7 +19,7 @@ public class Trabalhador {
     public Trabalhador(DadosCadastroTrabalhador dados) {
         this.matricula = dados.matricula();
         this.nome = dados.nome();
-        this.empresa = dados.empresa();
+        this.nome_emp_fk = dados.nome_emp_fk();
         this.rfid = dados.rfid();
         this.tipo = dados.tipo();
         this.habilitar = dados.habilitar();
@@ -32,7 +32,7 @@ public class Trabalhador {
         return "Trabalhador{" +
                 "matricula='" + matricula + '\'' +
                 ", nome='" + nome + '\'' +
-                ", empresa='" + empresa + '\'' +
+                ", nome_emp_fk='" + nome_emp_fk + '\'' +
                 ", rfid='" + rfid + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", habilitar='" + habilitar + '\'' +
@@ -50,8 +50,8 @@ public class Trabalhador {
         return nome;
     }
 
-    public String getEmpresa() {
-        return empresa;
+    public String getNome_emp_fk() {
+        return nome_emp_fk;
     }
 
     public String getRfid() {
@@ -69,7 +69,7 @@ public class Trabalhador {
     public void atualizaDados(DadosAlteracaoTrabalhador dados) {
         this.matricula = dados.matricula();
         this.nome = dados.nome();
-        this.empresa = dados.empresa();
+        this.nome_emp_fk = dados.nome_emp_fk();
         this.rfid = dados.rfid();
         this.tipo = dados.tipo();
         this.habilitar = dados.habilitar();

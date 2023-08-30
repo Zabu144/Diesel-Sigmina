@@ -18,6 +18,7 @@ public class Abastecimento_comboio {
     private String descricao;
     private String sigla_cat_fk;
     private String tag_eqp_fk;
+    private String nome_emp_fk;
 
 
     public Abastecimento_comboio(DadosCadastroAbastecimento_comboio dados) {
@@ -29,6 +30,7 @@ public class Abastecimento_comboio {
         this.descricao = dados.descricao();
         this.sigla_cat_fk = dados.sigla_cat_fk();
         this.tag_eqp_fk = dados.tag_eqp_fk();
+        this.nome_emp_fk = dados.nome_emp_fk();
     }
 
     public Abastecimento_comboio() {
@@ -47,6 +49,7 @@ public class Abastecimento_comboio {
                 ", descricao='" + descricao + '\'' +
                 ", sigla_cat_fk='" + sigla_cat_fk + '\'' +
                 ", tag_eqp_fk='" + tag_eqp_fk + '\'' +
+                ", nome_emp_fk='" + nome_emp_fk + '\'' +
                 '}';
     }
 
@@ -85,6 +88,7 @@ public class Abastecimento_comboio {
     public String getTag_eqp_fk() {
         return tag_eqp_fk;
     }
+    public String getNome_emp_fk() { return nome_emp_fk; }
 
     public void atualizaDados(DadosAlteracaoAbastecimento_comboio dados) {
         this.data_abastecimento = dados.data_abastecimento();
@@ -95,5 +99,6 @@ public class Abastecimento_comboio {
         this.descricao = dados.descricao();
         this.sigla_cat_fk = dados.sigla_cat_fk();
         this.tag_eqp_fk = dados.tag_eqp_fk();
+        this.nome_emp_fk = dados.nome_emp_fk();
     }
 }

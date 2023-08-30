@@ -10,15 +10,15 @@
 
     <script>
         function validarFormularioTrabalhador() {
-            var empresa_refSelect = document.getElementById("empresa_ref");
+            var nome_emp_fkSelect = document.getElementById("nome_emp_fk");
 
             var errorMessage = '';
 
-            if (empresa_refSelect.value === "") {
+            if (nome_emp_fkSelect.value === "") {
                 errorMessage += 'Empresa é obrigatória. ';
-                empresa_refSelect.style.borderColor = 'red';
+                nome_emp_fkSelect.style.borderColor = 'red';
             } else {
-                empresa_refSelect.style.borderColor = '';
+                nome_emp_fkSelect.style.borderColor = '';
             }
 
             document.getElementById('error-message').textContent = errorMessage;
@@ -57,16 +57,16 @@
 
             <div id="error-message" style="color: red;"></div>
             <div>
-                <label for="empresa_ref">
+                <label for="nome_emp_fk">
                     Empresa:
                 </label>
                 <a href="/empresa_ref/formulario" class="btn">Cadastrar empresa</a>
-                <select id="empresa_ref" name="empresa_ref">
+                <select id="nome_emp_fk" name="nome_emp_fk">
                     <option value="">Selecione a empresa</option>
-                    <option th:each="empresa_ref : ${empresa_refs}" th:value="${empresa_ref.nome}" th:selected="${
-                        trabalhador != null and trabalhador.empresa == empresa_ref.nome
+                    <option th:each="nome_emp_fk : ${empresa_refs}" th:value="${nome_emp_fk.nome}" th:selected="${
+                        trabalhador != null and trabalhador.nome_emp_fk == nome_emp_fk.nome
                     }">
-                       <span th:text="${empresa_ref.nome}"></span>
+                       <span th:text="${nome_emp_fk.nome}"></span>
                     </option>
                 </select>
             </div>

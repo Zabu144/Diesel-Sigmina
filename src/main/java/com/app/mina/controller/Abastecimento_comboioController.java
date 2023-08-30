@@ -6,6 +6,8 @@ import com.app.mina.domain.abastecimento_comboio.DadosAlteracaoAbastecimento_com
 import com.app.mina.domain.abastecimento_comboio.DadosCadastroAbastecimento_comboio;
 import com.app.mina.domain.categoria_ref.Categoria_ref;
 import com.app.mina.domain.categoria_ref.Categoria_refRepository;
+import com.app.mina.domain.empresa_ref.Empresa_ref;
+import com.app.mina.domain.empresa_ref.Empresa_refRepository;
 import com.app.mina.domain.equipamento.Equipamento;
 import com.app.mina.domain.equipamento.EquipamentoRepository;
 import com.app.mina.domain.posto_ref.Posto_ref;
@@ -41,6 +43,9 @@ public class Abastecimento_comboioController {
     @Autowired
     private Categoria_refRepository categoria_refRepository;
 
+    @Autowired
+    private Empresa_refRepository empresa_refRepository;
+
 
     @GetMapping("/formulario") // Manipula a requisição GET para a página de formulário
     public String carregaPaginaFormulario(Long id, Model model) {
@@ -60,6 +65,9 @@ public class Abastecimento_comboioController {
 
         List<Categoria_ref> categoria_refs = categoria_refRepository.findAll();
         model.addAttribute("categoria_refs", categoria_refs);
+
+        List<Empresa_ref> empresa_refs = empresa_refRepository.findAll();
+        model.addAttribute("empresa_refs", empresa_refs);
 
         return "abastecimento_comboio/formulario";
     }
